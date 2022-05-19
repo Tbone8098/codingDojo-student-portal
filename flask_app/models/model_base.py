@@ -29,17 +29,13 @@ class base_model:
         return ','.join(col1), ','.join(col2)
 
 # C ************************************************
-# C ************************************************
-# C ************************************************
 
     @classmethod
-    def create(cls, **data):
+    def create(cls, **data:dict):
         columns, values = cls.sanitize(**data)
         query = f'INSERT INTO {cls.table} ({columns}) VALUES ({values});'
         return connectToMySQL(DATABASE_SCHEMA).query_db(query, data)
 
-# R ************************************************
-# R ************************************************
 # R ************************************************
 
     @classmethod
@@ -62,8 +58,6 @@ class base_model:
         return results
 
 # U ************************************************
-# U ************************************************
-# U ************************************************
 
     @classmethod
     def update_one(self, id, **data):
@@ -71,8 +65,6 @@ class base_model:
         query = f'Update {self.table} SET {str} WHERE id = {id};'
         return connectToMySQL(DATABASE_SCHEMA).query_db(query,data)
 
-# D ************************************************
-# D ************************************************
 # D ************************************************
 
     @classmethod   

@@ -7,7 +7,7 @@ def index():
     if 'uuid' in session:
         return redirect('/dashboard')
     session['page'] = 'landing_page'
-    return render_template('onlooker/index.html')
+    return render_template('basic_user/index.html')
 
 @app.route('/dashboard')
 def dashboard():

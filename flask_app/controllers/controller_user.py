@@ -5,6 +5,7 @@ from flask_app.models import model_user
 
 @app.route('/user/new')          
 def user_new():
+    model_user.User.something()
     return render_template('user_new.html')
 
 @app.route('/user/create', methods=['POST'])          
