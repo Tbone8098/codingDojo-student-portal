@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block base_navbar %}
+{% include 'onlooker/navbar.html' %}
+{% endblock base_navbar %}
+
+{% block base_content %}
+    <div class="flex h-full justify-center items-center">
+        <div class="bg-primary p-5 text-secondary rounded-lg flex flex-col gap-3">
+            <p>Welcome to the Student Portal</p>
+            <a href="/login" class="btn bg-primary-dark">Login</a>
+        </div>
+    </div>
+{% endblock base_content %}

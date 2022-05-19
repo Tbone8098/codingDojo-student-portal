@@ -1,0 +1,14 @@
+/* buttons */
+.btn {
+    padding: 0.15em 0.5em;
+    cursor: pointer;
+    border-radius: 0.5em;
+    text-align: center;
+}
+
+/* forms */
+input {
+    border: 0.15em solid black;
+    border-radius: 0.25em;
+    text-align: center;
+}

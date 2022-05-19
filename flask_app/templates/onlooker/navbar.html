@@ -1,0 +1,10 @@
+<div class="flex justify-between items-center px-4 shadow shadow-black py-5 mb-5">
+    <h1 class="text-2xl">Student Portal</h1>
+    <ul>
+        {% if session['page'] != 'landing_page' %}
+            <li>
+                <span class="btn">Login</span>
+            </li>
+        {% endif %}
+    </ul>
+</div>
