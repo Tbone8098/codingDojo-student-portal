@@ -72,3 +72,20 @@ class base_model:
         str = self.sanitize(**data, paired=True)
         query = f'DELETE FROM {self.table} WHERE id = {id}'
         return connectToMySQL(DATABASE_SCHEMA).query_db(query,data)
+
+# Validation ************************************************
+
+    # @staticmethod
+    # def validate(form_data:dict, validation_data:dict) -> bool:
+    #     """
+    #     form_data: is the request.form from the html page
+    #     validation_data: keys need to match the keys in the form_data dictionary. The values are 
+    #     """
+    #     is_valid = True
+
+    #     return  is_valid
+
+
+    # @staticmethod
+    # def validate_api():
+    #     pass

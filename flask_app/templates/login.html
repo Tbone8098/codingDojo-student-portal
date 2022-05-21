@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block base_content %}
+    <div class="flex flex-col justify-center items-center h-full">
+        <p class="text-2xl text-center">Login</p>
+        <form action="/process/login" method="post" class="flex flex-col gap-2 bg-my-blue p-10 rounded">
+            <input type="text" name="email" id="email" placeholder="Email" value="{{ session['email'] }}">
+            {% for message in get_flashed_messages(category_filter=["err_user_email_login"]) %}
+            <p class="alert bg-my-danger text-white">{{ message }}</p>
+            {% endfor %}
+            <input type="text" name="pw" id="pw" placeholder="Password">
+            {% for message in get_flashed_messages(category_filter=["err_user_pw_login"]) %}
+            <p class="alert bg-my-danger text-white">{{ message }}</p>
+            {% endfor %}
+            <div class="flex gap-3 items-center">
+                <input type="checkbox" class="" name="remember_me" id="remember_me" {{ 'checked' if session['email'] else '' }}>
+                <label for="remember_me">Remember Me</label>
+            </div>
+            <button class="btn bg-my-green">Enter</button>
+        </form>
+    </div>
+{% endblock base_content %}
