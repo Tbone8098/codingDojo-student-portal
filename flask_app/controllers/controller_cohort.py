@@ -13,6 +13,7 @@ def cohort_create():
 
 @app.route('/cohorts')          
 def cohort_all():
+    session['page'] = 'cohorts'
     return render_template('admin/cohort_all.html')
 
 @app.route('/cohort/<int:id>')          
