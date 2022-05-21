@@ -22,7 +22,7 @@
 		"scope": "html",
 		"body": [
 		  "{% for message in get_flashed_messages(category_filter=[\"err_${1:err name}\"]) %}",
-		  "<p class=\"alert alert-danger\">{{ message }}</p>",
+		  "<p class=\"alert bg-my-danger text-white\">{{ message }}</p>",
 		  "{% endfor %}"
 		],
 		"description": "html flash msg with categories"

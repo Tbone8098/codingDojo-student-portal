@@ -1,61 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            'my-danger': '#D43232',
-                            'my-accent': '#D48032',
-                            'my-dark': '#443850',
-                            'my-light': '#FFFFFF',
-                            'my-blue': '#526C9D',
-                            'my-green': '#BBBE64',
-                        },
-                        fontFamily: {
-                            'jose': ['Josefin Sans', 'sans-serif'],
-                            'lato': ['Lato', 'sans-serif']
-                        }
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'my-danger': '#D43232',
+                        'my-accent': '#D48032',
+                        'my-dark': '#443850',
+                        'my-light': '#FFFFFF',
+                        'my-blue': '#526C9D',
+                        'my-green': '#BBBE64',
+                    },
+                    fontFamily: {
+                        'jose': ['Josefin Sans', 'sans-serif'],
+                        'lato': ['Lato', 'sans-serif']
                     }
                 }
             }
-        </script>
+        }
+    </script>
 
-        {% block css %}
-            <!-- my css -->
-        {% endblock css %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block css %}
+    <!-- my css -->
+    {% endblock css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-        <title>Student Portal</title>
-    </head>
-    <body>
-        <div class="page-wrapper h-screen">
-            {% block base_navbar %}
-                <!-- navbar -->
-            {% endblock base_navbar %}
-            
-            {% block base_content %}
-                <!-- content -->
-            {% endblock base_content %}
+    <title>Student Portal</title>
+</head>
 
-            <div class="fixed bottom-5 right-5">
-                {% block icon_man %}
-                    <img src="{{ url_for('static', filename='img/svg/portal_guy.svg') }}" alt="">
-                {% endblock icon_man %}
-            </div>
+<body>
+    <div class="page-wrapper h-screen">
+        {% block base_navbar %}
+        <!-- navbar -->
+        {% endblock base_navbar %}
+
+        {% block base_content %}
+        <!-- content -->
+        {% endblock base_content %}
+
+        <div class="fixed bottom-5 right-5">
+            {% block icon_man %}
+            <img src="{{ url_for('static', filename='img/svg/portal_guy.svg') }}" alt="">
+            {% endblock icon_man %}
         </div>
+    </div>
 
 
-        {% block js %}
-            <!-- my js -->
-        {% endblock js %}
-    </body>
+    {% block js %}
+    <!-- my js -->
+    {% endblock js %}
+</body>
+
 </html>

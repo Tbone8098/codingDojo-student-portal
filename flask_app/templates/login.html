@@ -1,9 +1,5 @@
 {% extends 'base.html' %}
 
-{% block base_navbar %}
-    {% include 'components/admin/navbar.html' %}
-{% endblock base_navbar %}
-
 {% block base_content %}
     <div class="flex flex-col justify-center items-center h-full">
         <p class="text-2xl text-center">Login</p>
@@ -16,6 +12,10 @@
             {% for message in get_flashed_messages(category_filter=["err_user_pw_login"]) %}
             <p class="alert bg-my-danger text-white">{{ message }}</p>
             {% endfor %}
+            <div class="flex gap-3 items-center">
+                <input type="checkbox" name="remember_me" id="remember_me">
+                <label for="remember_me">Remember Me</label>
+            </div>
             <button class="btn bg-my-green">Enter</button>
         </form>
     </div>

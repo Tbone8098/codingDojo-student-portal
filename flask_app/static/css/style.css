@@ -13,21 +13,26 @@ body {
 .btn {
     padding: 0.15em 0.5em;
     cursor: pointer;
-    border-radius: 0.2em;
+    border-radius: 0.5em;
     text-align: center;
 }
 
 /* forms */
 input {
     border: 0.15em solid black;
-    border-radius: 0.2em;
+    border-radius: 0.5em;
     text-align: center;
+}
+
+input[type='checkbox'] {
+    padding: 0.5em;
+    background-color: blue;
 }
 
 /* validations */
 .alert {
     width: 100%;
     border: 0.15em solid black;
-    border-radius: 0.2em;
+    border-radius: 0.5em;
     text-align: center;
 }
