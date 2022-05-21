@@ -14,7 +14,10 @@ def index():
 @login_required
 def dashboard():
     session['page'] = 'dashboard'
-    return render_template('admin/dashboard.html')
+    if session['level'] == 5:
+        return render_template('admin/dashboard.html')
+    elif session['level'] < 5:
+        return render_template('basic_user/dashboard.html')
 
 @app.route('/register')
 def register():
@@ -35,6 +38,7 @@ def process_register():
 
     id = model_user.User.create(**data)
     session['uuid'] = id
+    session['level'] = 5
     return redirect('/')
 
 @app.route('/process/login', methods=['post'])
@@ -47,7 +51,7 @@ def process_login():
     else:
         if 'email' in session:
             del session['email']
-            
+
     return redirect('/dashboard')
 
 @app.route('/logout')

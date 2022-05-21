@@ -15,6 +15,7 @@ class User(model_base.base_model):
         self.last_name = data['last_name']
         self.email = data['email']
         self.pw = data['pw']
+        self.level = data['level']
 
     @staticmethod
     def validate_login(data:dict) -> bool:
@@ -42,6 +43,7 @@ class User(model_base.base_model):
                 flash("Invalid Credentials", 'err_user_email_login')
             else:
                 session['uuid'] = potential_user.id
+                session['level'] = potential_user.level
 
         return is_valid
 
