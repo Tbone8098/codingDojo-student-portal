@@ -7,7 +7,7 @@ def index():
     if 'uuid' in session:
         return redirect('/dashboard')
     session['page'] = 'landing_page'
-    return render_template('basic_user/index.html')
+    return render_template('login.html')
 
 @app.route('/dashboard')
 def dashboard():
@@ -16,8 +16,8 @@ def dashboard():
     session['page'] = 'dashboard'
     return render_template('admin/dashboard.html')
 
-@app.route('/login')
-def login():
+@app.route('/process/login', methods=['post'])
+def process_login():
     return render_template('admin/login.html')
 
 @app.route('/', defaults={'path': ''})

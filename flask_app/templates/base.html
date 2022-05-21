@@ -13,12 +13,12 @@
                 theme: {
                     extend: {
                         colors: {
-                            danger: '#E63946',
-                            primary: '#457B9D',
-                            'primary-dark': '#1D3557',
-                            'secondary': '#F1FAEE',
-                            'secondary-dark': '#A8DADC',
-
+                            'my-danger': '#D43232',
+                            'my-accent': '#D48032',
+                            'my-dark': '#443850',
+                            'my-light': '#FFFFFF',
+                            'my-blue': '#526C9D',
+                            'my-green': '#BBBE64',
                         },
                         fontFamily: {
                             'jose': ['Josefin Sans', 'sans-serif'],
@@ -45,6 +45,12 @@
             {% block base_content %}
                 <!-- content -->
             {% endblock base_content %}
+
+            <div class="fixed bottom-5 right-5">
+                {% block icon_man %}
+                    <img src="{{ url_for('static', filename='img/svg/portal_guy.svg') }}" alt="">
+                {% endblock icon_man %}
+            </div>
         </div>
 
 
