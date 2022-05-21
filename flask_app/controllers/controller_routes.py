@@ -41,6 +41,13 @@ def process_register():
 def process_login():
     if not model_user.User.validate_login(request.form):
         return redirect('/')
+    
+    if 'remember_me' in request.form:
+        session['email'] = request.form['email']
+    else:
+        if 'email' in session:
+            del session['email']
+            
     return redirect('/dashboard')
 
 @app.route('/logout')
