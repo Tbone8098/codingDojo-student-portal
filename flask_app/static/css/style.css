@@ -1,4 +1,13 @@
 
+:root {
+    --my-danger: #D43232;
+    --my-accent: #D48032;
+    --my-dark: #443850;
+    --my-light: #FFFFFF;
+    --my-blue: #526C9D;
+    --my-green: #BBBE64;
+}
+
 /* fonts */
 body {
     font-family: 'Lato', 'sans-serif';
@@ -15,6 +24,19 @@ body {
     cursor: pointer;
     border-radius: 0.5em;
     text-align: center;
+}
+
+.btn-menu {
+    /* btn rounded shadow shadow-slate-500 border-black border-2 py-3 */
+    padding: 0.75rem 0;
+    border: 0.1em solid black;
+    border-radius: 0.25rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --tw-shadow-color: #64748b;
+}
+
+.btn-menu:hover {
+    background-color: var(--my-blue);
 }
 
 /* forms */

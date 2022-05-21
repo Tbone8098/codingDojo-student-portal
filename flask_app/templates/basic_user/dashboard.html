@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block base_navbar %}
+    {% include 'components/basic_user/navbar.html' %}
+{% endblock base_navbar %}
+
 {% block base_content %}
     <h1>Student Dashboard</h1>
     <a href="/logout">Logout</a>
