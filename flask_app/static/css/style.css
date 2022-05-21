@@ -9,18 +9,25 @@ body {
 }
 
 
-
 /* buttons */
 .btn {
     padding: 0.15em 0.5em;
     cursor: pointer;
-    border-radius: 0.5em;
+    border-radius: 0.2em;
     text-align: center;
 }
 
 /* forms */
 input {
     border: 0.15em solid black;
-    border-radius: 0.25em;
+    border-radius: 0.2em;
+    text-align: center;
+}
+
+/* validations */
+.alert {
+    width: 100%;
+    border: 0.15em solid black;
+    border-radius: 0.2em;
     text-align: center;
 }

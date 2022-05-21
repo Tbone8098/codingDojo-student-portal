@@ -8,8 +8,14 @@
     <div class="flex flex-col justify-center items-center h-full">
         <p class="text-2xl text-center">Login</p>
         <form action="/process/login" method="post" class="flex flex-col gap-2 bg-my-blue p-10 rounded">
-            <input type="text" name="username" id="username" placeholder="Username"/>
+            <input type="text" name="email" id="email" placeholder="Email"/>
+            {% for message in get_flashed_messages(category_filter=["err_user_email_login"]) %}
+            <p class="alert bg-my-danger text-white">{{ message }}</p>
+            {% endfor %}
             <input type="text" name="pw" id="pw" placeholder="Password">
+            {% for message in get_flashed_messages(category_filter=["err_user_pw_login"]) %}
+            <p class="alert bg-my-danger text-white">{{ message }}</p>
+            {% endfor %}
             <button class="btn bg-my-green">Enter</button>
         </form>
     </div>
