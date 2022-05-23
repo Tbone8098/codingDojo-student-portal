@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block base_navbar %}
+
+    {% block admin_navbar %}
+        {% include 'components/admin/navbar.html' %}
+    {% endblock admin_navbar %}
+    
+{% endblock base_navbar %}
+
+{% block base_content %}
+    
+    {% block admin_content %}
+        
+    {% endblock admin_content %}
+
+{% endblock base_content %}
