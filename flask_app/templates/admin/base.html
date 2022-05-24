@@ -9,9 +9,16 @@
 {% endblock base_navbar %}
 
 {% block base_content %}
+<div class="flex flex-col w-full h-screen">
+    <div class="mt-5 flex justify-between mx-5 items-center">
+        {% block admin_header %}
+        
+        {% endblock admin_header %}
+    </div>
     
     {% block admin_content %}
-        
+    <p>Admin content here</p>
     {% endblock admin_content %}
+</div>
 
 {% endblock base_content %}

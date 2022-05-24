@@ -5,7 +5,7 @@ from flask_app.models import model_cohort
 
 @app.route('/cohort/new')          
 def cohort_new():
-    return render_template('cohort_new.html')
+    return render_template('admin/cohort_new.html')
 
 @app.route('/cohort/create', methods=['POST'])          
 def cohort_create():

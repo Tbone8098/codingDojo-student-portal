@@ -1,0 +1,32 @@
+{% extends 'admin/base.html' %}
+
+{% block admin_header %}
+    <h1 class="text-4xl">New Cohort</h1>
+    <a href="/cohorts" class="btn">All Cohorts</a>
+{% endblock admin_header %}
+
+{% block admin_content %}
+    <div class="grid grid-cols-12 h-full gap-3">
+        <div class="col-span-3 border-black border-2 rounded my-5 px-3">
+            <h2 class="text-2xl border-b-2 border-black my-5">Cohort Info</h2>
+            <form class="flex flex-col gap-3" action="/cohort/create" method="post">
+                <input type="text" name="type" id="type" placeholder="Stack Type">
+                <input type="text" name="month" id="month" placeholder="Stack Month">
+                <input type="text" name="year" id="year" placeholder="Stack Year">
+                <input type="text" name="start_date" id="start_date" placeholder="Stack Start Date">
+                <input type="text" name="end_date" id="end_date" placeholder="Stack End Date">
+                <button class="btn bg-my-green">Create Cohort</button>
+            </form>
+        </div>
+        <div class="col-span-8 border-black border-2 rounded my-5 px-3">
+            <div class="border-b-2 border-black my-5 flex justify-between items-center py-3">
+                <h2 class="text-2xl">Students</h2>
+                <div>
+                    <form>
+                        <input type="text" name="name" id="name" placeholder="Name">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock admin_content %}
