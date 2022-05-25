@@ -2,12 +2,20 @@ from flask_app import app
 from flask import render_template, redirect, session, request, flash
 from flask_app.config.utils import check_logged_in_id,login_admin_required
 
-from flask_app.models import model_cohort, model_stack
+from flask_app.models import model_cohort, model_stack, model_student
 
 @app.route('/cohort/new')
 @login_admin_required           
 def cohort_new():
     session['page'] = 'cohort_new'
+    test = model_stack.Stack.get_all()
+    print(test)
+    # check stacks
+    if not model_stack.Stack.get_all():
+        stack_list = ['python', 'MERN', 'C#', 'Java']
+        for item in stack_list:
+            model_stack.Stack.create(name=item)
+
     context = {
         'all_stacks': model_stack.Stack.get_all(),
     }
@@ -19,8 +27,8 @@ def cohort_create():
     if not model_cohort.Cohort.validate(request.form):
         return redirect('/cohort/new')
 
-    model_cohort.Cohort.create(**request.form, creator_id=session['uuid'])
-    return redirect('/cohorts')
+    id = model_cohort.Cohort.create(**request.form, creator_id=session['uuid'])
+    return redirect(f'/cohort/{id}/edit')
 
 @app.route('/cohorts')
 @login_admin_required            
@@ -42,13 +50,16 @@ def cohort_edit(id):
     context = {
         'cohort': model_cohort.Cohort.get_one(id=id),
         'all_stacks': model_stack.Stack.get_all(),
+        'all_students': model_student.Student.get_all(cohort_id=id)
     }
     return render_template('admin/cohort_edit.html', **context)
 
 @app.route('/cohort/<int:id>/update', methods=['POST'])
 @login_admin_required           
 def cohort_update(id):
-    return redirect('/')
+    print(request.form)
+    model_cohort.Cohort.update_one(id=id, **request.form)
+    return redirect('/cohorts')
 
 @app.route('/cohort/<int:id>/delete')
 @login_admin_required    

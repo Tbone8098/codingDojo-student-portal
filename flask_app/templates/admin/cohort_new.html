@@ -13,9 +13,11 @@
                 <div class="flex flex-col w-full">
                     <!-- <input type="text" name="type" id="type" placeholder="Stack Type"> -->
                     <select name="stack_id" id="stack_id">
+                        {% if all_stacks %}
                         {% for stack in all_stacks %}
-                            <option value="{{stack.id}}">{{ stack.name }}</option>
+                        <option value="{{stack.id}}">{{ stack.name }}</option>
                         {% endfor %}
+                        {% endif %}
                     </select>
                     {% for message in get_flashed_messages(category_filter=["err_cohort_type"]) %}
                     <p class="alert bg-my-danger text-white">{{ message }}</p>
@@ -39,9 +41,6 @@
         <div class="col-span-8 border-black border-2 rounded my-5 px-3">
             <div class="border-b-2 border-black my-5 flex justify-between items-center py-3">
                 <h2 class="text-2xl">Students</h2>
-                <div>
-                    {% include 'components/admin/student_create.html' %}
-                </div>
             </div>
         </div>
     </div>

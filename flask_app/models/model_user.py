@@ -11,8 +11,7 @@ class User(model_base.base_model):
     def __init__(self, data):
         super().__init__(data) 
         self.id = data['id']
-        self.first_name = data['first_name']
-        self.last_name = data['last_name']
+        self.name = data['name']
         self.email = data['email']
         self.pw = data['pw']
         self.level = data['level']
@@ -51,13 +50,9 @@ class User(model_base.base_model):
     def validate_register(data:dict) -> bool:
         is_valid = True
 
-        if len(data['first_name']) < 1:
+        if len(data['name']) < 1:
             is_valid = False
-            flash('first_name is required', 'err_user_first_name_login')
-
-        if len(data['last_name']) < 1:
-            is_valid = False
-            flash('last_name is required', 'err_user_last_name_login')
+            flash('name is required', 'err_user_name_login')
 
         if len(data['email']) < 1:
             is_valid = False

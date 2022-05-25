@@ -26,3 +26,9 @@ def check_logged_in_id(f):
             return redirect('/')
         return f(*args, **kwargs)
     return check
+
+def history(data:dict):
+    if 'history' not in session:
+        session['history']
+    
+    print(data)
