@@ -5,6 +5,8 @@
     --my-light: #FFFFFF;
     --my-blue: #526C9D;
     --my-green: #BBBE64;
+
+    --my-border-color: 0.1em solid rgba(206, 205, 205, 0.301);
 }
 
 /* fonts */
@@ -70,6 +72,7 @@ h3 {
 
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* border: var(--my-border-color); */
     border-radius: 10px;
 }
 
@@ -91,7 +94,7 @@ h3 {
 /* forms */
 input {
     height: 2.5em;
-    border: 0.1em solid black;
+    border: var(--my-border-color);
     box-shadow: 0.15em 0.15em 0.15em rgb(99, 99, 99);
     border-radius: 0.5em;
     text-align: center;
