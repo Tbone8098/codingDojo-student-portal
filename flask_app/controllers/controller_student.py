@@ -1,4 +1,4 @@
-from flask_app import app
+from flask_app import app, bcrypt
 from flask_app.config.utils import login_admin_required
 from flask import render_template, redirect, session, request
 
@@ -19,7 +19,7 @@ def student_create():
 
     data = {
         **request.form,
-        'pw': request.form['name']
+        'pw': bcrypt.generate_password_hash(request.form['name'])
     }
     del data['cohort_id']
     user_id = model_user.User.create(**data)
