@@ -13,7 +13,6 @@ class base_model:
 
     @classmethod
     def sanitize(self, paired=False, **data):
-        print(data)
         col1 = []
         col2 = []
         for key in data:

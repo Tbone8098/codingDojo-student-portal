@@ -19,6 +19,14 @@ h3 {
 }
 
 
+/* Page Layout */
+.header {
+    margin: 1em;
+    display: flex;
+    justify-content: space-between;
+
+}
+
 /* buttons */
 .btn {
     padding: 0.4em 0.5em;
@@ -33,15 +41,24 @@ h3 {
     color: var(--my-accent)
 }
 
+/* Menu */
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0px;
+    gap: 182px;
+    isolation: isolate;
+
+    position: relative;
+    width: 233px;
+    height: 1024px;
+
+    background: #FFFFFF;
+    box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
 .btn-menu {
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0.75rem;
-    width: 100%;
-    border-radius: 0.25rem;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    --tw-shadow-color: #64748b; */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -62,11 +79,11 @@ h3 {
 
 .btn-menu-active {
     background-color: var(--my-blue);
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 
 .btn-menu-active:hover {
-    background-color: var(--my-accent);
+    background-color: var(--my-blue);
     cursor: default;
 
 }
@@ -91,4 +108,10 @@ input[type='checkbox'] {
     border: 0.15em solid black;
     border-radius: 0.5em;
     text-align: center;
+}
+
+/* tables */
+table tr {
+    height: 50px;
+    border-bottom: 0.1em solid black;
 }

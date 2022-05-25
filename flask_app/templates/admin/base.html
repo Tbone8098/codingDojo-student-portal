@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 
 {% block base_navbar %}
-
+<div class="col-span-2">
     {% block admin_navbar %}
-        {% include 'components/admin/navbar.html' %}
+    {% include 'components/admin/navbar.html' %}
     {% endblock admin_navbar %}
-    
+</div>
 {% endblock base_navbar %}
 
 {% block base_content %}
-<div class="flex flex-col w-full h-screen">
-    <div class="mt-5 flex justify-between mx-5 items-center">
+<div class="col-span-10 h-full ml-5 flex flex-col">
+    <div class="header">
         {% block admin_header %}
-        
+
         {% endblock admin_header %}
     </div>
-    
+
     {% block admin_content %}
     <p>Admin content here</p>
     {% endblock admin_content %}

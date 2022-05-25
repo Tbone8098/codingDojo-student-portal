@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block base_content %}
-<div class="flex flex-col justify-center items-center h-full">
+<div class="col-span-12 flex flex-col justify-center items-center">
     <p class="text-2xl text-center">Register</p>
     <form action="/process/register" method="post" class="flex flex-col gap-2 bg-my-blue p-10 rounded">
-        <input type="text" name="first_name" id="first_name" placeholder="first_name" />
+        <input type="text" name="first_name" id="first_name" placeholder="First Name" />
         {% for message in get_flashed_messages(category_filter=["err_user_first_name_login"]) %}
         <p class="alert bg-my-danger text-white">{{ message }}</p>
         {% endfor %}
 
-        <input type="text" name="last_name" id="last_name" placeholder="last_name" />
+        <input type="text" name="last_name" id="last_name" placeholder="Last Name" />
         {% for message in get_flashed_messages(category_filter=["err_user_last_name_login"]) %}
         <p class="alert bg-my-danger text-white">{{ message }}</p>
         {% endfor %}
