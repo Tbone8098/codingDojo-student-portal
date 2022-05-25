@@ -51,20 +51,31 @@
             </div>
             <div>
                 {% if all_students %}
-                <ul>
+                <table class="w-full text-center">
+                    <thead>
+                        <tr>
+                            <th>Remove</th>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
                     {% for student in all_students %}
-                    <li>
-                        <div class="flex gap-3">
-                            <a href="/student/{{student.id}}/{{cohort.id}}/remove">X</a>
-                            <p>{{ student.nickname }}</p>
-                            <div class="flex gap-1">
-                                <a href="student/{{student.id}}">view</a>
-                                <a href="student/{{student.id}}/edit">Edit</a>
-                            </div>
-                        </div>
-                    </li>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="/student/{{student.id}}/{{cohort.id}}/remove">X</a>
+                            </td>
+                            <td>
+                                <p>{{ student.nickname }}</p>
+                            </td>
+                            <td class="flex gap-1 justify-center">
+                                <a class="btn bg-my-blue text-white" href="/student/{{student.id}}">View Student</a>
+                                <a class="btn bg-my-dark text-white" href="/student/{{student.id}}/edit">Edit</a>
+                            </td>
+                        </tr>
+                    </tbody>
                     {% endfor %}
-                </ul>
+                </table>
                 {% endif %}
             </div>
         </div>
