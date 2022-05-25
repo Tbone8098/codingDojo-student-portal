@@ -41,7 +41,8 @@
 </head>
 
 <body>
-    <div class="page-wrapper h-screen flex">
+    <div class="page-wrapper h-screen grid grid-cols-12">
+        
         {% block base_navbar %}
         <!-- navbar -->
         {% endblock base_navbar %}
@@ -51,6 +52,11 @@
         {% endblock base_content %}
 
         <div class="fixed bottom-5 right-5">
+            <div class="mb-5">
+                {% for message in get_flashed_messages(category_filter=["err_notifications"]) %}
+                <p class="alert bg-my-danger text-white">{{ message }}</p>
+                {% endfor %}
+            </div>
             {% block icon_man %}
             <img src="{{ url_for('static', filename='img/svg/portal_guy.svg') }}" alt="">
             {% endblock icon_man %}

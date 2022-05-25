@@ -1,0 +1,54 @@
+{% extends 'admin/base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock css %}
+
+{% block admin_content %}
+<div class="flex flex-col w-full items-center justify-center">
+    <div class="flex flex-col gap-3 border border-black p-5 rounded-lg shadow-lg w-11/12">
+        <h1 class="text-4xl text-center">Settings</h1>
+        <div class="w-full flex justify-center my-5">
+            <ul class="flex gap-3">
+                <li>
+                    <a class="btn bg-my-blue text-white py-3" href="/settings">User Settings</a>
+                </li>
+                <li>
+                    <a class="btn bg-my-blue text-white py-3" href="/settings/system">System Settings</a>
+                </li>
+                <li>
+                    <a class="text-my-danger" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+        <div class="flex flex-col items-center">
+        {% if subpage == 'system' %}
+            <h2>System Settings</h2>
+        </div>
+        {% elif subpage == 'user' %}
+        <h2 class="text-2xl">User Settings</h2>
+        <div class="w-6/12 blocks">
+            <form class="flex flex-col gap-3 " action="/user/{{user.id}}/update" method="post">
+                <div class="flex gap-3">
+                    <input class="w-full" type="text" name="first_name" id="first_name" placeholder="first_name"
+                        value="{{ user.first_name }}">
+                    <input class="w-full" type="text" name="last_name" id="last_name" placeholder="last_name"
+                        value="{{ user.last_name }}">
+                </div>
+                <input class="w-full" type="text" name="email" id="email" placeholder="email" value="{{ user.email }}">
+                <button class="btn bg-my-green">Update</button>
+            </form>
+        </div>
+        <div class="blocks mt-5 w-6/12">
+            <form action="/user/{{user.id}}/update" method="post">
+                <input type="text" name="old_pw" id="old_pw" placeholder="Old Password"> 
+                <input type="text" name="pw" id="pw" placeholder="New Password">
+                <input type="text" name="confirm_pw" id="confirm_pw" placeholder="Confirm Password">
+                <button class="btn bg-my-danger text-white py-2">Update Password</button>
+            </div>
+            </form>
+        {% endif %}
+    </div>
+</div>
+</div>
+{% endblock admin_content %}

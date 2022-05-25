@@ -8,3 +8,11 @@ def login_required(f):
             return redirect('/')
         return f(*args, **kwargs)
     return login
+
+def check_logged_in_id(f):
+    @wraps(f)
+    def check(*args, **kwargs):
+        if session['uuid'] != kwargs['id']:
+            return redirect('/')
+        return f(*args, **kwargs)
+    return check

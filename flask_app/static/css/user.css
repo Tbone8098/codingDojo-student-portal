@@ -1,0 +1,10 @@
+.blocks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    border: 0.2em solid black;
+    border-radius: 0.5em;
+    box-shadow: 0.1em 0.1em 0.1em var(--my-dark);
+}

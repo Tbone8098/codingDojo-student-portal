@@ -1,0 +1,55 @@
+{% extends 'admin/base.html' %}
+
+<!-- one database call to get the current stack and name it as current_stack -->
+{% set current_stack = cohort.current_stack %}
+
+{% block admin_header %}
+    <h1 class="text-4xl">{{ current_stack.name }} {{ cohort.start_date }} - {{ cohort.end_date }}</h1>
+    <a href="/cohorts" class="btn">All Cohorts</a>
+{% endblock admin_header %}
+
+{% block admin_content %}
+    <div class="grid grid-cols-12 h-full gap-3">
+        <div class="col-span-3 border-black border-2 rounded my-5 px-3">
+            <h2 class="text-2xl border-b-2 border-black my-5">Cohort Info</h2>
+            <form class="flex flex-col gap-3" action="/cohort/create" method="post">
+                <div class="flex flex-col w-full">
+                    <select name="stack_id" id="stack_id">
+                        <option value="{{ current_stack.id }}">{{ current_stack.name }}</option>
+                        {% for stack in all_stacks %}
+                        {% if stack.name != current_stack.name %}
+                        <option value="{{stack.id}}">{{ stack.name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% for message in get_flashed_messages(category_filter=["err_cohort_type"]) %}
+                    <p class="alert bg-my-danger text-white">{{ message }}</p>
+                    {% endfor %}
+                </div>
+                <div class="flex flex-col w-full">
+                    <input type="date" name="start_date" id="start_date" placeholder="Stack Start Date" value="{{ cohort.start_date }}">
+                    {% for message in get_flashed_messages(category_filter=["err_cohort_start_date"]) %}
+                    <p class="alert bg-my-danger text-white">{{ message }}</p>
+                    {% endfor %}
+                </div>
+                <div class="flex flex-col w-full">
+                    <input type="date" name="end_date" id="end_date" placeholder="Stack End Date" value="{{ cohort.end_date }}">
+                    {% for message in get_flashed_messages(category_filter=["err_cohort_end_date"]) %}
+                    <p class="alert bg-my-danger text-white">{{ message }}</p>
+                    {% endfor %}
+                </div>
+                <button class="btn bg-my-green">Update Cohort</button>
+            </form>
+        </div>
+        <div class="col-span-8 border-black border-2 rounded my-5 px-3">
+            <div class="border-b-2 border-black my-5 flex justify-between items-center py-3">
+                <h2 class="text-2xl">Students</h2>
+                <div>
+                    <form>
+                        <input type="text" name="name" id="name" placeholder="Name">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock admin_content %}

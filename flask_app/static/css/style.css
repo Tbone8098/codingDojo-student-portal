@@ -1,4 +1,3 @@
-
 :root {
     --my-danger: #D43232;
     --my-accent: #D48032;
@@ -13,30 +12,65 @@ body {
     font-family: 'Lato', 'sans-serif';
 }
 
-.h1,h2,h3 {
+.h1,
+h2,
+h3 {
     font-family: 'Josefin Sans', 'sans-serif';
 }
 
 
+/* Page Layout */
+.header {
+    margin: 1em;
+    display: flex;
+    justify-content: space-between;
+
+}
+
 /* buttons */
 .btn {
-    padding: 0.15em 0.5em;
+    padding: 0.4em 0.5em;
     cursor: pointer;
+    /* border: 0.1em solid black; */
+    box-shadow: 0.15em 0.15em 0.15em rgb(99, 99, 99);
     border-radius: 0.5em;
     text-align: center;
 }
 
-.btn-menu {
-    /* btn rounded shadow shadow-slate-500 border-black border-2 py-3 */
+.btn:hover {
+    color: var(--my-accent)
+}
+
+/* Menu */
+.menu {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0.75rem;
-    width: 100%;
-    border: 0.1em solid black;
-    border-radius: 0.25rem;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --tw-shadow-color: #64748b;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0px;
+    gap: 182px;
+    isolation: isolate;
+
+    position: relative;
+    width: 233px;
+    height: 1024px;
+
+    background: #FFFFFF;
+    box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 16px 10px;
+    gap: 10px;
+
+    width: 197px;
+    height: 62px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
 }
 
 .btn-menu:hover {
@@ -44,14 +78,14 @@ body {
 }
 
 .btn-menu-active {
-    background-color: var(--my-accent);
-    pointer-events: none;
+    background-color: var(--my-blue);
+    /* pointer-events: none; */
 }
 
 .btn-menu-active:hover {
-    background-color: var(--my-accent);
+    background-color: var(--my-blue);
     cursor: default;
-    
+
 }
 
 /* forms */
@@ -74,4 +108,10 @@ input[type='checkbox'] {
     border: 0.15em solid black;
     border-radius: 0.5em;
     text-align: center;
+}
+
+/* tables */
+table tr {
+    height: 50px;
+    border-bottom: 0.1em solid black;
 }
