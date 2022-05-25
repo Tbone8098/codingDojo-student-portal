@@ -18,7 +18,8 @@ def student_create():
         return redirect(f'/cohort/{cohort_id}/edit')
 
     data = {
-        **request.form
+        **request.form,
+        'pw': request.form['name']
     }
     del data['cohort_id']
     user_id = model_user.User.create(**data)
@@ -31,6 +32,10 @@ def student_create():
 
     model_student.Student.create(**data)
     return redirect(f'/cohort/{cohort_id}/edit')
+
+@app.route('/student/bulk_add')
+def bulk_add():
+    return render_template('admin/student_bulk.html')
 
 @app.route('/student/<int:id>')          
 @login_admin_required

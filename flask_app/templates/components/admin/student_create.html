@@ -1,8 +1,11 @@
-<form class="flex gap-3" action="/student/create" method="post">
-    <input type="hidden" name="cohort_id" id="cohort_id" value="{{cohort.id}}">
-    <input type="text" name="name" id="name" placeholder="Name">
-    {% for message in get_flashed_messages(category_filter=["err_student_name"]) %}
-    <p class="alert bg-my-danger text-white">{{ message }}</p>
-    {% endfor %}
-    <button class="btn bg-my-green">Add</button>
-</form>
+<div class="flex gap-3">
+    <form class="flex gap-3" action="/student/create" method="post">
+        <input type="hidden" name="cohort_id" id="cohort_id" value="{{cohort.id}}">
+        <input type="text" name="name" id="name" placeholder="Name">
+        {% for message in get_flashed_messages(category_filter=["err_student_name"]) %}
+        <p class="alert bg-my-danger text-white">{{ message }}</p>
+        {% endfor %}
+        <button class="btn bg-my-green">Add</button>
+    </form>
+    <a href="/student/bulk_add" class="btn bg-my-blue text-white">Bulk Add</a>
+</div>
