@@ -17,6 +17,10 @@ class Student(model_base.base_model):
         self.lpacp = data['lpacp']
         self.user_id = data['user_id']
 
+    @property
+    def user(self):
+        return model_user.User.get_one(id=self.user_id)
+
     @classmethod
     def get_all(cls, **data) -> list:
         query = "SELECT * FROM students WHERE cohort_id = %(cohort_id)s"

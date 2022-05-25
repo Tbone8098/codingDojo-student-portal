@@ -1,5 +1,5 @@
 from flask_app import app
-from flask import render_template, redirect, session, request, flash
+from flask import render_template, redirect, session, request, flash, jsonify
 from flask_app.config.utils import check_logged_in_id,login_admin_required
 
 from flask_app.models import model_cohort, model_stack, model_student
@@ -60,6 +60,12 @@ def cohort_update(id):
     print(request.form)
     model_cohort.Cohort.update_one(id=id, **request.form)
     return redirect('/cohorts')
+
+@app.route('/api/cohort/<int:id>/update', methods=['post'])
+@login_admin_required
+def api_cohort_update(id):
+    model_cohort.Cohort.update_one(id=id, **request.form)
+    return jsonify(msg="success")
 
 @app.route('/cohort/<int:id>/delete')
 @login_admin_required    

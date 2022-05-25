@@ -98,7 +98,7 @@ h3 {
 }
 
 /* forms */
-input {
+input[type='text'] {
     height: 2.5em;
     border: var(--my-border-color);
     box-shadow: 0.15em 0.15em 0.15em rgb(99, 99, 99);
