@@ -12,6 +12,7 @@ class Cohort(model_base.base_model):
         self.end_date = data['end_date']
         self.stack_id = data['stack_id']
         self.creator_id = data['creator_id']
+        self.is_current = data['is_current']
 
     @property
     def current_stack(self):
