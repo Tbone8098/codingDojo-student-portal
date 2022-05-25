@@ -12,7 +12,7 @@
     <div class="grid grid-cols-12 h-full gap-3">
         <div class="col-span-3 border-black border-2 rounded my-5 px-3">
             <h2 class="text-2xl border-b-2 border-black my-5">Cohort Info</h2>
-            <form class="flex flex-col gap-3" action="/cohort/create" method="post">
+            <form class="flex flex-col gap-3" action="/cohort/{{cohort.id}}/update" method="post">
                 <div class="flex flex-col w-full">
                     <select name="stack_id" id="stack_id">
                         <option value="{{ current_stack.id }}">{{ current_stack.name }}</option>

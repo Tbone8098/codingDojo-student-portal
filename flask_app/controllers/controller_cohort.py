@@ -48,7 +48,9 @@ def cohort_edit(id):
 @app.route('/cohort/<int:id>/update', methods=['POST'])
 @login_admin_required           
 def cohort_update(id):
-    return redirect('/')
+    print(request.form)
+    model_cohort.Cohort.update_one(id=id, **request.form)
+    return redirect('/cohorts')
 
 @app.route('/cohort/<int:id>/delete')
 @login_admin_required    
