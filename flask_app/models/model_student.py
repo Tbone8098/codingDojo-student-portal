@@ -9,10 +9,31 @@ class Student(model_base.base_model):
     def __init__(self, data):
         super().__init__(data)
         self.nickname = data['nickname']
-        self.current_cohort_id = data['current_cohort_id']
+        self.cohort_id = data['cohort_id']
         self.need_to_contact = data['need_to_contact']
         self.ap_status = data['ap_status']
         self.ap_count = data['ap_count']
         self.sessions_missed = data['sessions_missed']
         self.lpacp = data['lpacp']
         self.user_id = data['user_id']
+
+    @classmethod
+    def get_all(cls, **data) -> list:
+        query = "SELECT * FROM students WHERE cohort_id = %(cohort_id)s"
+        results = connectToMySQL(DATABASE_SCHEMA).query_db(query, data)
+        if results:
+            all_students = []
+            for dict in results:
+                all_students.append(cls(dict))
+            return all_students
+        return []
+
+    @staticmethod
+    def validate(data:dict) -> bool:
+        is_valid = True
+
+        if len(data['name']) < 1:
+            is_valid = False
+            flash('field is required', 'err_student_name')
+        
+        return is_valid

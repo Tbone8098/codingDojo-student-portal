@@ -51,13 +51,9 @@ class User(model_base.base_model):
     def validate_register(data:dict) -> bool:
         is_valid = True
 
-        if len(data['first_name']) < 1:
+        if len(data['name']) < 1:
             is_valid = False
-            flash('first_name is required', 'err_user_first_name_login')
-
-        if len(data['last_name']) < 1:
-            is_valid = False
-            flash('last_name is required', 'err_user_last_name_login')
+            flash('name is required', 'err_user_name_login')
 
         if len(data['email']) < 1:
             is_valid = False

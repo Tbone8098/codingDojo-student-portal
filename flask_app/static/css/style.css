@@ -43,6 +43,12 @@ h3 {
     color: var(--my-accent)
 }
 
+.disabled { 
+    pointer-events: none;
+    background-color: rgb(211, 209, 209) !important;
+    color: rgb(160, 160, 160) !important;
+}
+
 /* Menu */
 .menu {
     display: flex;
