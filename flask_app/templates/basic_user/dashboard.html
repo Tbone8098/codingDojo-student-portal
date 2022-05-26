@@ -1,3 +1,5 @@
+{% import 'components/dash_utils.html' as utils %}
+
 {% extends 'base.html' %}
 
 {% block base_navbar %}
@@ -5,6 +7,42 @@
 {% endblock base_navbar %}
 
 {% block base_content %}
-    <h1>Student Dashboard</h1>
-    <a href="/logout">Logout</a>
+<div class="h-full flex flex-col px-7">
+    <div class="flex justify-between mt-4 mb-5 w-full items-center">
+        <h1>Daily Focus</h1>
+        <button class="bg-my-green px-8 py-2 rounded-lg h-fit">
+            <p>Month Calendar</p>
+        </button>
+    </div>
+    <div class="flex justify-between gap-5">
+
+        <div class="border border-black w-full  rounded-2xl flex flex-col gap-5 overflow-hidden shadow-md">
+            <div class="flex justify-between items-center px-5 pt-5">
+                <h3>Intro To Python</h3>
+                <p>Mon 5/2</p>
+            </div>
+            <ul class="px-5">
+                <li>{{ utils.schedule_item('9:00', 'Introductions') }}<li>
+                <li>{{ utils.schedule_item('10:00', 'Python vs JavaScript') }}<li>
+                <li>{{ utils.schedule_item('12:00', 'Lunch') }}<li>
+                <li>{{ utils.schedule_item('1:00', 'Pair Programming group activity') }}<li>
+            </ul>
+            <div class="bg-my-blue/20 px-5 py-5">
+                {{ utils.schedule_item('EOD', 'Functions Intermediate I') }}
+                {{ utils.schedule_item('Reading', 'Python OOP: Methods') }}
+            </div>
+        </div>
+
+        <div class="max-w-xs w-full flex flex-col gap-5">
+            <h3>Staff</h3>
+            <ul class="flex flex-col gap-5">
+                <li>{{ utils.staff_member('Tyler Thibault', 1) }}</li>
+                <li>{{ utils.staff_member('Alfredo', 2) }}</li>
+                <li>{{ utils.staff_member('Pablo Padilla', 3) }}</li>
+                <li>{{ utils.staff_member('Kyle M', 4) }}</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
 {% endblock base_content %}
