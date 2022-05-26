@@ -1,0 +1,9 @@
+{% import 'components/button.html' as button %}
+
+<div class="shadow-md shadow-black w-56 mr-5 py-4 px-5">
+    <ul class="flex flex-col gap-5">
+        <li>{{ button.button('Dashboard', 'dashboard') }}</li>
+        <li>{{ button.button('Leaderboard', 'leaderboard') }}</li>
+        <li>{{ button.button('Instructors', 'instructors') }}</li>
+    </ul>
+</div>
