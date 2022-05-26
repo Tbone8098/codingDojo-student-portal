@@ -1,17 +1,17 @@
 from flask_app import app, bcrypt
-from flask_app.config.utils import login_required
+from flask_app.config.utils import login_required, login_admin_required
 from flask import render_template, redirect, session, request
 
 from flask_app.models import model_student, model_user
 
-@app.route('/student/new')          
-@login_required
-def student_new():
-    context = {}
-    return render_template('student_new.html', **context)
+# @app.route('/student/new')          
+# @login_required
+# def student_new():
+#     context = {}
+#     return render_template('student_new.html', **context)
 
 @app.route('/student/create', methods=['POST'])          
-@login_required
+@login_admin_required
 def student_create():
     cohort_id = request.form['cohort_id']
     if not model_student.Student.validate(request.form):
@@ -37,8 +37,8 @@ def student_create():
 def bulk_add():
     return render_template('admin/student_bulk.html')
 
-@app.route('/student/<int:id>')          
-@login_required
+@app.route('/student/<int:id>/login')          
+@login_admin_required
 def student_login(id):
     student = model_student.Student.get_one(id=id)
     
@@ -47,10 +47,12 @@ def student_login(id):
     return redirect('/')
 
 @app.route('/student/<int:id>/edit')          
-@login_required
+@login_admin_required
 def student_edit(id):
-    context = {}
-    return render_template('student_edit.html', **context)
+    context = {
+        'student': model_student.Student.get_one(id=id)
+    }
+    return render_template('admin/student_edit.html', **context)
 
 @app.route('/student/<int:id>/update', methods=['POST'])          
 @login_required

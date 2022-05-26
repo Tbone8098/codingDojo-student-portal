@@ -40,10 +40,16 @@ def cohort_all():
     data = {'column': 'is_current', 'order': 'asc'}
 
     if request.args.get('column') in approved_columns:
+        print("test A")
+        print(request.args.get('column'))
         data['column'] = request.args.get('column')
 
     if request.args.get('order') in approved_orders:
+        print("test B")
+        print(request.args.get('order'))
         data['order'] = request.args.get('order')
+
+    print(data)
 
     context = {
         'all_cohorts': model_cohort.Cohort.get_all(data)

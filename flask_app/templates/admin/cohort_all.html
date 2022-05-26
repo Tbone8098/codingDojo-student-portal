@@ -12,35 +12,35 @@
     <thead>
         <tr>
             <th>
-                <a href="/cohorts?columns=is_current">Current</a>
-                {% if request.args.get('order') == 'asc' %}
-                <a href="/cohorts?columns=is_current&order=desc">🔼</a>
+                <a href="/cohorts?column=is_current">Current</a>
+                {% if request.args.get('column')=='is_current' and request.args.get('order') == 'asc' %}
+                <a href="/cohorts?column=is_current&order=desc">🔼</a>
                 {% else %}
-                <a href="/cohorts?columns=is_current&order=asc">🔽</a>
+                <a href="/cohorts?column=is_current&order=asc">🔽</a>
                 {% endif %}
             </th>
             <th>
-                <a href="/cohorts?columns=stack_id">Stack</a>
-                {% if request.args.get('order') == 'asc' %}
-                <a href="/cohorts?columns=stack_id&order=desc">🔼</a>
+                <a href="/cohorts?column=stack_id">Stack</a>
+                {% if request.args.get('column')=='stack_id' and request.args.get('order') == 'asc' %}
+                <a href="/cohorts?column=stack_id&order=desc">🔼</a>
                 {% else %}
-                <a href="/cohorts?columns=stack_id&order=asc">🔽</a>
+                <a href="/cohorts?column=stack_id&order=asc">🔽</a>
                 {% endif %}
             </th>
             <th>
-                <a href="/cohorts?columns=start_date">Start Date</a>
-                {% if request.args.get('order') == 'asc' %}
-                <a href="/cohorts?columns=start_date&order=desc">🔼</a>
+                <a href="/cohorts?column=start_date">Start Date</a>
+                {% if request.args.get('column')=='start_date' and request.args.get('order') == 'asc' %}
+                <a href="/cohorts?column=start_date&order=desc">🔼</a>
                 {% else %}
-                <a href="/cohorts?columns=start_date&order=asc">🔽</a>
+                <a href="/cohorts?column=start_date&order=asc">🔽</a>
                 {% endif %}
             </th>
             <th>
-                <a href="/cohorts?columns=end_date">End Date</a>
-                {% if request.args.get('order') == 'asc' %}
-                <a href="/cohorts?columns=end_date&order=desc">🔼</a>
+                <a href="/cohorts?column=end_date">End Date</a>
+                {% if request.args.get('column')=='end_date' and request.args.get('order') == 'asc' %}
+                <a href="/cohorts?column=end_date&order=desc">🔼</a>
                 {% else %}
-                <a href="/cohorts?columns=end_date&order=asc">🔽</a>
+                <a href="/cohorts?column=end_date&order=asc">🔽</a>
                 {% endif %}
             </th>
             <th>Action</th>
