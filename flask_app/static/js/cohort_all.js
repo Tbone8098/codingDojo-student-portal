@@ -1,14 +1,23 @@
 
 var isCurrentBox = document.querySelectorAll('.is_current')
 for (const box of isCurrentBox) {
-    box.addEventListener('change', updateCurrent(box))
+    box.addEventListener('change', function(){
+        return updateCurrent(box)
+    })
 }
 
 function updateCurrent(el) {
-    console.log(el);
     let status = el.getAttribute('status')
     let id = el.parentElement.parentElement.getAttribute('cohort_id')
-    console.log(status);
+    
+    if (status == 1) {
+        el.setAttribute('status', '0')
+        el.parentElement.children[1].textContent = "No"
+        
+    } else {
+        el.setAttribute('status', '1')
+        el.parentElement.children[1].textContent = "Yes"
+    }
 
     form = new FormData()
     if (status == 1) status = 0
@@ -21,15 +30,17 @@ function updateCurrent(el) {
     })
         .then(resp => resp.json())
         .then(data => {
-            if (data.msg === 'success') {
+            console.log(data);
+            if (data.msg != 'success') {
                 if (status) {
-                    el.parentElement.innerHTML = `
-                    <input type="checkbox" name="is_current" class="is_current" status="${status}" checked> Yes
-                    `
+                    console.log("test1");
+                    el.setAttribute('status', 1)
+                    el.parentElement.children[1].textContent = "Yes"
+                    
                 } else {
-                    el.parentElement.innerHTML = `
-                    <input type="checkbox" name="is_current" class="is_current" status="${status}"> No
-                    `
+                    console.log("test2");
+                    el.setAttribute('status', 0)
+                    el.parentElement.children[1].textContent = "No"
                 }
             }
         })
