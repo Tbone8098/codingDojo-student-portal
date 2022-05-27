@@ -1,0 +1,48 @@
+{% import 'components/header.html' as head %}
+
+
+{% extends 'base.html' %}
+
+{% block base_navbar %}
+{% include 'components/navbar.html' %}
+{% endblock base_navbar %}
+
+{% block base_content %}
+<div class="flex flex-col">
+    {{ head.header('Profile') }}
+    <div>
+        <div class="flex border border-black border-b-0 w-fit rounded-t-md">
+            <button class="px-12 py-4 w-fit h-fit bg-my-blue rounded-tl-md">
+                <p class="text-white">User</p>
+            </button>
+            <button class="px-12 py-4 w-fit h-fit bg-white rounded-tr-md">
+                <p>Assignments</p>
+            </button>
+        </div>
+        <div class="w-full flex flex-col items-center justify-center p-6 border border-black rounded-b-md">
+            <div class="text-center">
+                <h3>13,023</h3>
+                <p>Participation Points</p>
+            </div>
+            <div class="flex gap-8">
+                <form class="w-80 flex flex-col gap-3">
+                    <p>Change Nickname</p>
+                    <input type="text" placeholder="Nickname" class="text-2xl">
+                    <button class="bg-my-green w-fit px-3.5 py-1.5 rounded-md self-end">
+                        <p>Update</p>
+                    </button>
+                </form>
+                <form class="w-80 flex flex-col gap-3">
+                    <p>Change Nickname</p>
+                    <input type="text" placeholder="Old Password" class="text-2xl">
+                    <input type="text" placeholder="New Password" class="text-2xl">
+                    <input type="text" placeholder="Confirm Password" class="text-2xl">
+                    <button class="bg-my-green w-fit px-3.5 py-1.5 rounded-md self-end">
+                        <p>Update</p>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock base_content %}

@@ -67,3 +67,8 @@ def student_delete(id):
 def student_remove(id, cohort_id):
     model_student.Student.update_one(cohort_id=None, id=id)
     return redirect(f'/cohort/{cohort_id}/edit')
+
+@app.route('/profile')
+@login_required
+def student_profile():
+    return render_template("basic_user/profile.html")
