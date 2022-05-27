@@ -30,7 +30,7 @@ def cohort_create():
     id = model_cohort.Cohort.create(**request.form, creator_id=session['uuid'])
     return redirect(f'/cohort/{id}/edit')
 
-@app.route('/cohorts')
+@app.route('/cohort/all')
 @login_admin_required            
 def cohort_all():
     print(request.args)
