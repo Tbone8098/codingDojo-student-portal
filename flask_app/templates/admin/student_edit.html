@@ -3,22 +3,101 @@
 {% set user = student.user %}
 
 {% block admin_header %}
-    <h1 class="text-4xl">Student Page</h1>
+{% if user.name == student.nickname %}
+<h1 class="text-4xl">Student Page: {{ user.name }}</h1>
+{% else %}
+<h1 class="text-4xl">Student Page: {{ user.name }} ({{ student.nickname }})</h1>
+{% endif %}
 {% endblock admin_header %}
 
 {% block admin_content %}
-    <div>
-        <h2 class="text-2xl">{{ user.name }}</h2>
-        <div class="flex gap-2">
-            <p>{{ user.email }}</p> <span id="edit_email">✏️</span>
+<div>
+    <div class="flex justify-between">
+        <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-3 text-center">
+                <label for="name">Name</label>
+                <input class="api-input" type="text" name="name" id="name" value="{{ user.name }}"
+                    url="/api/user/{{user.id}}/update">
+            </div>
+            <div class="flex flex-col gap-3 text-center">
+                <label for="email">Email</label>
+                <input class="api-input" type="text" name="email" id="email" value="{{ user.email }}"
+                    url="/api/user/{{user.id}}/update">
+            </div>
         </div>
-        <div class="hidden">
-            <input type="text" name="email" id="email" value="{{user.email}}">
+        <div class="flex flex-col gap-3 text-center">
+            <label for="nickname">Nickname</label>
+            <input class="api-input" type="text" name="nickname" id="nickname" value="{{ student.nickname }}"
+                url="/api/student/{{student.id}}/update">
         </div>
     </div>
+</div>
+<div class="flex justify-evenly gap-3 mt-5">
+    <div class="flex flex-col gap-3 text-center">
+        <label for="ap_status">AP Status</label>
+        <input class="api-input" type="text" name="ap_status" id="ap_status" value="{{ student.ap_status }}"
+            url="/api/student/{{student.id}}/update">
+    </div>
+    <div class="flex flex-col gap-3 text-center">
+        <label for="ap_count">AP Count</label>
+        <input class="api-input" type="text" name="ap_count" id="ap_count" value="{{ student.ap_count }}"
+            url="/api/student/{{student.id}}/update">
+    </div>
+    <div class="flex flex-col gap-3 text-center">
+        <label for="sessions_missed">Sessions Missed</label>
+        <input class="api-input" type="text" name="sessions_missed" id="sessions_missed"
+            value="{{ student.sessions_missed }}" url="/api/student/{{student.id}}/update">
+    </div>
+    <div class="flex flex-col gap-3 text-center">
+        <label for="lpacp">LPACP</label>
+        <input class="api-input" type="text" name="lpacp" id="lpacp" value="{{ student.lpacp }}"
+            url="/api/student/{{student.id}}/update">
+    </div>
+    <div class="flex flex-col gap-3 text-center">
+        <label for="exam_status">Exam Status</label>
+        <select class="api-input my-select" name="exam_status" id="exam_status"
+            url="/api/student/{{student.id}}/update">
+            {% for item in student.exam_options %}
+                {% if student.exam_status == 'none' %}
+                <option value="none" selected disabled hidden>Select an Option</option>
+                {% endif %}
+                <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
 {% endblock admin_content %}
 
 
+{% if student.exam_status != 'none' %}
+<option value="{{student.exam_status}}">{{ student.exam_status }}</option>
+{% else %}
+<option value="none" selected disabled hidden>Select an Option</option>
+<option value="{{ item }}">{{ item }}</option>
+{% endif %}
+
 {% block js %}
-    <script src="{{ url_for('static', filename='js/student_edit.js') }}"></script>r
+<script src="{{ url_for('static', filename='js/student_edit.js') }}"></script>r
 {% endblock js %}
+
+
+<div class="flex flex-col text-center">
+    <label for="pw">Password</label>
+    <input type="text" name="pw" id="pw" placeholder="Enter New Password">
+</div>
+
+<div class="flex justify-between mx-5">
+    <div>
+        <h2 class="text-2xl">{{ user.name }}</h2>
+        <div class="flex gap-2">
+            {{ user.email | safe }} <span id="edit_email">✏️</span>
+        </div>
+        <div class="hidden">
+            <input type="text" name="email" id="email_input" value="{{user.email}}" user_id="{{user.id}}">
+        </div>
+    </div>
+    <div>
+        <p>nickname</p>
+        <input type="text" name="nickname" id="nickname_form" value="{{student.nickname}}">
+    </div>
+</div>

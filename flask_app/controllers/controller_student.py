@@ -1,6 +1,6 @@
 from flask_app import app, bcrypt
 from flask_app.config.utils import login_required, login_admin_required
-from flask import render_template, redirect, session, request
+from flask import render_template, redirect, session, request, jsonify
 
 from flask_app.models import model_student, model_user
 
@@ -50,7 +50,8 @@ def student_login(id):
 @login_admin_required
 def student_edit(id):
     context = {
-        'student': model_student.Student.get_one(id=id)
+        'student': model_student.Student.get_one(id=id),
+        'content': "<span style='color:red'>this is a test</span> <script>alert('hello')</script>"
     }
     return render_template('admin/student_edit.html', **context)
 
@@ -58,6 +59,34 @@ def student_edit(id):
 @login_required
 def student_update(id):
     return redirect('/')
+
+@app.route('/api/student/<int:id>/update', methods=['POST'])          
+@login_required
+def api_student_update(id):
+    all_errors = {}
+
+    input_dict = {
+        'nickname': model_student.Student.validate_nickname_api, 
+        }
+
+    for item in input_dict:
+        if item in request.form:
+            errors = input_dict[item](request.form)
+            if len(errors) > 0:
+                for key in errors:
+                    all_errors[key] = errors[key]
+
+    if len(all_errors):
+        res = {
+            'status': 404,
+            'errors': all_errors
+        }
+        return jsonify(res)
+    model_student.Student.update_one(**request.form, id=id)
+    res = {
+        'status': 200
+    }
+    return jsonify(res)
 
 @app.route('/student/<int:id>/delete')          
 @login_required

@@ -75,3 +75,39 @@ class User(model_base.base_model):
             flash('Confirm Password is required', 'err_user_confirm_pw_login')
 
         return is_valid
+
+    @staticmethod
+    def validate_email_api(data:dict) -> dict:
+        errors = {}
+
+        if len(data['email']) < 1:
+            errors['err_user_email'] = 'Email is required'
+        elif not EMAIL_REGEX.match(data['email']): 
+            errors['err_user_email'] = 'Invalid email address'
+
+        return errors
+
+    @staticmethod
+    def validate_name_api(data:dict) -> dict:
+        errors = {}
+
+        if len(data['name']) < 1:
+            errors['err_user_name'] = 'name is required'
+
+        return errors
+
+    @staticmethod
+    def validate_pw_api(data:dict) -> dict:
+        errors = {}
+
+        if len(data['pw']) < 1:
+            errors['err_user_pw'] = 'pw is required'
+
+        if len(data['confirm_pw']) < 1:
+            errors['err_user_confirm_pw'] = 'confirm_pw is required'
+
+        if data['pw'] != data['confirm_pw']:
+            errors['err_user_confirm_pw'] = 'Passwords do not match'
+
+
+        return errors

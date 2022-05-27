@@ -16,6 +16,8 @@ class Student(model_base.base_model):
         self.sessions_missed = data['sessions_missed']
         self.lpacp = data['lpacp']
         self.user_id = data['user_id']
+        self.exam_status = data['exam_status']
+        self.exam_options = ['Red', 'Black', 'Fail', 'Inpro', 'none']
 
     @property
     def user(self):
@@ -41,3 +43,13 @@ class Student(model_base.base_model):
             flash('field is required', 'err_student_name')
         
         return is_valid
+
+    
+    @staticmethod
+    def validate_nickname_api(data:dict) -> dict:
+        errors = {}
+
+        if len(data['nickname']) < 1:
+            errors['err_user_nickname'] = 'nickname is required'
+
+        return errors
