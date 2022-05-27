@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block base_navbar %}
-<div class="col-span-2">
+<div class="h-full">
     {% block admin_navbar %}
     {% include 'components/admin/navbar.html' %}
     {% endblock admin_navbar %}
@@ -9,7 +9,7 @@
 {% endblock base_navbar %}
 
 {% block base_content %}
-<div class="col-span-10 h-full ml-5 flex flex-col">
+<div class="h-full ml-5 flex flex-col">
     <div class="header">
         {% block admin_header %}
 

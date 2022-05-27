@@ -12,6 +12,7 @@ class Student(model_base.base_model):
         self.cohort_id = data['cohort_id']
         self.need_to_contact = data['need_to_contact']
         self.ap_status = data['ap_status']
+        self.ap_options = ['none', 'On AP', 'Complete']
         self.ap_count = data['ap_count']
         self.sessions_missed = data['sessions_missed']
         self.lpacp = data['lpacp']

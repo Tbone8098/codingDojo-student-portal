@@ -51,7 +51,6 @@ def student_login(id):
 def student_edit(id):
     context = {
         'student': model_student.Student.get_one(id=id),
-        'content': "<span style='color:red'>this is a test</span> <script>alert('hello')</script>"
     }
     return render_template('admin/student_edit.html', **context)
 

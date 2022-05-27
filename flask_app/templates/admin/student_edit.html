@@ -32,11 +32,18 @@
         </div>
     </div>
 </div>
-<div class="flex justify-evenly gap-3 mt-5">
+<div class="grid grid-cols-2 gap-3 mt-5">
     <div class="flex flex-col gap-3 text-center">
         <label for="ap_status">AP Status</label>
-        <input class="api-input" type="text" name="ap_status" id="ap_status" value="{{ student.ap_status }}"
+        <select class="api-input my-select" name="exam_status" id="exam_status"
             url="/api/student/{{student.id}}/update">
+            {% for item in student.ap_options %}
+                {% if student.ap_options == 'none' %}
+                <option value="none" selected disabled hidden>Select an Option</option>
+                {% endif %}
+                <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="flex flex-col gap-3 text-center">
         <label for="ap_count">AP Count</label>
