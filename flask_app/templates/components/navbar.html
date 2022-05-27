@@ -3,9 +3,16 @@
 <div class="shadow-md shadow-black/25 w-60 py-4 px-5 h-full flex flex-col justify-between relative">
 
     <ul class="flex flex-col gap-5 z-10 w-full">
-        <li>{{ utils.button('Profile', 'profile', 'img/svg/portal_guy.svg') }}</li>
-        <li>{{ utils.button('Dashboard', 'dashboard', 'img/svg/dashboard.svg') }}</li>
-        <li>{{ utils.button('Leaderboard', 'leaderboard', 'img/svg/leaderboard.svg') }}</li>
+        {% if session['level'] == 5 %}
+        <li>{{ utils.button('Dashboard', '/dashboard', 'img/svg/dashboard.svg') }}</li>
+        <li>{{ utils.button('All Cohorts', '/cohort/all', 'img/svg/cohorts.svg') }}</li>
+        <li>{{ utils.button('All Students', '/student/all', 'img/svg/cohorts.svg') }}</li>
+
+        {% else %}
+        <li>{{ utils.button('Profile', '/profile', 'img/svg/portal_guy.svg') }}</li>
+        <li>{{ utils.button('Dashboard', '/dashboard', 'img/svg/dashboard.svg') }}</li>
+        <li>{{ utils.button('Leaderboard', '/leaderboard', 'img/svg/leaderboard.svg') }}</li>
+        {% endif %}
     </ul>
     <ul class="flex flex-col gap-5 z-10">
         <li>
@@ -13,7 +20,11 @@
                 <p class="text-center text-white">Log out</p>
             </a>
         </li>
-        <li>{{ utils.button('Settings', 'settings', 'img/svg/settings.svg') }}</li>
+        {% if session['level'] == 5 %}
+        <li>{{ utils.button('Settings', '/settings', 'img/svg/settings.svg') }}</li>
+        {% endif %}
+
     </ul>
+    <!-- WAVE SVG -->
     <div class="absolute bg-my-blue h-1/4 w-full bottom-0 left-0 "></div>
 </div>
