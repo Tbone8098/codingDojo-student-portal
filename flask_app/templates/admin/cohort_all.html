@@ -7,13 +7,42 @@
 
 
 {% block admin_content %}
+
 <table class="text-center">
     <thead>
         <tr>
-            <th>Current</th>
-            <th>Stack</th>
-            <th>Start Date</th>
-            <th>End Date</th>
+            <th>
+                <a href="/cohorts?column=is_current">Current</a>
+                {% if request.args.get('column')=='is_current' and request.args.get('order') == 'asc' %}
+                <a href="/cohorts?column=is_current&order=desc">🔼</a>
+                {% else %}
+                <a href="/cohorts?column=is_current&order=asc">🔽</a>
+                {% endif %}
+            </th>
+            <th>
+                <a href="/cohorts?column=stack_id">Stack</a>
+                {% if request.args.get('column')=='stack_id' and request.args.get('order') == 'asc' %}
+                <a href="/cohorts?column=stack_id&order=desc">🔼</a>
+                {% else %}
+                <a href="/cohorts?column=stack_id&order=asc">🔽</a>
+                {% endif %}
+            </th>
+            <th>
+                <a href="/cohorts?column=start_date">Start Date</a>
+                {% if request.args.get('column')=='start_date' and request.args.get('order') == 'asc' %}
+                <a href="/cohorts?column=start_date&order=desc">🔼</a>
+                {% else %}
+                <a href="/cohorts?column=start_date&order=asc">🔽</a>
+                {% endif %}
+            </th>
+            <th>
+                <a href="/cohorts?column=end_date">End Date</a>
+                {% if request.args.get('column')=='end_date' and request.args.get('order') == 'asc' %}
+                <a href="/cohorts?column=end_date&order=desc">🔼</a>
+                {% else %}
+                <a href="/cohorts?column=end_date&order=asc">🔽</a>
+                {% endif %}
+            </th>
             <th>Action</th>
         </tr>
     </thead>
@@ -22,9 +51,11 @@
         <tr cohort_id="{{ cohort.id }}">
             <td>
                 {% if cohort.is_current %}
-                <input type="checkbox" name="is_current" class="is_current" status="{{ cohort.is_current }}" checked> Yes
+                <input type="checkbox" name="is_current" class="is_current" status="{{ cohort.is_current }}" checked>
+                <label for="is_current">Yes</label>
                 {% else %}
-                <input type="checkbox" name="is_current" class="is_current" status="{{ cohort.is_current }}"> No
+                <input type="checkbox" name="is_current" class="is_current" status="{{ cohort.is_current }}">
+                <label for="is_current">No</label>
                 {% endif %}
             </td>
             <td>{{ cohort.stack.name }}</td>

@@ -33,9 +33,26 @@ def cohort_create():
 @app.route('/cohorts')
 @login_admin_required            
 def cohort_all():
-    session['page'] = 'cohorts'
+    print(request.args)
+    approved_columns = ['is_current', 'stack_id', 'start_date', 'end_date']
+    approved_orders = ['desc', 'asc']
+    
+    data = {'column': 'is_current', 'order': 'asc'}
+
+    if request.args.get('column') in approved_columns:
+        print("test A")
+        print(request.args.get('column'))
+        data['column'] = request.args.get('column')
+
+    if request.args.get('order') in approved_orders:
+        print("test B")
+        print(request.args.get('order'))
+        data['order'] = request.args.get('order')
+
+    print(data)
+
     context = {
-        'all_cohorts': model_cohort.Cohort.get_all()
+        'all_cohorts': model_cohort.Cohort.get_all(data)
     }
     return render_template('admin/cohort_all.html', **context)
 

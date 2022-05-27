@@ -14,19 +14,26 @@ body {
     font-family: 'Lato', 'sans-serif';
 }
 
-.h1,
+p {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.test {
+    width: 240px !important;
+}
+
+h1,
 h2,
 h3 {
     font-family: 'Josefin Sans', 'sans-serif';
 }
-
 
 /* Page Layout */
 .header {
     margin: 1em;
     display: flex;
     justify-content: space-between;
-
 }
 
 /* buttons */
@@ -43,7 +50,7 @@ h3 {
     color: var(--my-accent)
 }
 
-.disabled { 
+.disabled {
     pointer-events: none;
     background-color: rgb(211, 209, 209) !important;
     color: rgb(160, 160, 160) !important;
@@ -98,7 +105,15 @@ h3 {
 }
 
 /* forms */
-input[type='text'] {
+/* input[type='text'] {
+    height: 2.5em;
+    border: var(--my-border-color);
+    box-shadow: 0.15em 0.15em 0.15em rgb(99, 99, 99);
+    border-radius: 0.5em;
+    text-align: center;
+}
+
+.my-select {
     height: 2.5em;
     border: var(--my-border-color);
     box-shadow: 0.15em 0.15em 0.15em rgb(99, 99, 99);
@@ -109,7 +124,7 @@ input[type='text'] {
 input[type='checkbox'] {
     padding: 0.5em;
     background-color: blue;
-}
+} */
 
 /* validations */
 .alert {

@@ -19,8 +19,8 @@ class Cohort(model_base.base_model):
         return model_stack.Stack.get_one(id=self.stack_id)
 
     @classmethod
-    def get_all(cls):
-        query = "SELECT * FROM cohorts JOIN stacks ON cohorts.stack_id = stacks.id;"
+    def get_all(cls, data:dict):
+        query = f"SELECT * FROM cohorts JOIN stacks ON cohorts.stack_id = stacks.id order by {data['column']} {data['order']};"
         results = connectToMySQL(DATABASE_SCHEMA).query_db(query)
         if results:
             all_cohorts = []
