@@ -77,3 +77,7 @@ def student_profile(subpage='user'):
         'subpage': subpage
     }
     return render_template("basic_user/profile.html", **context)
+
+@app.route("/leaderboard")
+def leader_board():
+    return render_template("basic_user/leaderboard.html")

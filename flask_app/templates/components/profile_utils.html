@@ -1,6 +1,6 @@
 {% macro tab(title, link, selected, left) %}
 <a href="{{link}}"
-    class="{{ 'bg-my-blue text-white' if selected }} {{ 'rounded-tl-md' if left }} {{ 'rounded-tr-md' if not left }}  px-12 py-4 w-fit h-fit bg-white">
+    class="{{ 'bg-my-blue text-white' if selected else 'bg-white' }} {{ 'rounded-tl-md' if left else 'rounded-tr-md'}} px-12 py-4 w-fit h-fit">
     <p>{{title}}</p>
 </a>
 {% endmacro %}

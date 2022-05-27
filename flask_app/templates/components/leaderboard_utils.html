@@ -1,0 +1,24 @@
+{% macro item(name, place) %}
+{% set ord = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th'] %}
+{% if place == 0 %}
+<div class="flex gap-7 bg-my-blue text-white py-2.5 border-t border-black">
+    <p class="w-24 text-right">{{ord[place]}}</p>
+    <p>{{name}}</p>
+</div>
+{% elif place == 1 %}
+<div class="flex gap-7  bg-my-blue/90 text-white py-2.5 border-t border-black">
+    <p class="w-24 text-right">{{ord[place]}}</p>
+    <p>{{name}}</p>
+</div>
+{% elif place == 2 %}
+<div class="flex gap-7 bg-my-blue/70 text-white py-2.5 border-t border-black">
+    <p class="w-24 text-right">{{ord[place]}}</p>
+    <p>{{name}}</p>
+</div>
+{% else %}
+<div class="flex gap-7 py-2.5 border-t border-black">
+    <p class="w-24 text-right">{{ord[place]}}</p>
+    <p>{{name}}</p>
+</div>
+{% endif %}
+{% endmacro %}
