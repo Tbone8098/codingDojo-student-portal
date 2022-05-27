@@ -105,7 +105,7 @@ h3 {
 }
 
 /* forms */
-input[type='text'] {
+/* input[type='text'] {
     height: 2.5em;
     border: var(--my-border-color);
     box-shadow: 0.15em 0.15em 0.15em rgb(99, 99, 99);
@@ -116,7 +116,7 @@ input[type='text'] {
 input[type='checkbox'] {
     padding: 0.5em;
     background-color: blue;
-}
+} */
 
 /* validations */
 .alert {

@@ -1,0 +1,61 @@
+{% macro tab(title, link, selected, left) %}
+<a href="{{link}}"
+    class="{{ 'bg-my-blue text-white' if selected }} {{ 'rounded-tl-md' if left }} {{ 'rounded-tr-md' if not left }}  px-12 py-4 w-fit h-fit bg-white">
+    <p>{{title}}</p>
+</a>
+{% endmacro %}
+
+{% macro assignment_item(title, is_completed) %}
+<div class='flex items-center gap-4'>
+    {% if is_completed %}
+    <input class="w-4 h-4 appearance-none outline outline-1 checked:bg-my-green" type="checkbox" name="{{title}}" checked>
+    {% else %}
+    <input class="w-4 h-4 appearance-none outline outline-1 bg-white disabled:bg-white checked:bg-my-green" type="checkbox" name="{{title}}">
+    {% endif %}
+    <p>{{title}}</p>
+</div>
+{% endmacro %}
+
+{% macro user() %}
+<div class="text-center mb-7">
+    <h3>13,023</h3>
+    <p>Participation Points</p>
+</div>
+<div class="flex gap-8">
+    <form class="w-80 flex flex-col gap-3">
+        <p>Change Nickname</p>
+        <input type="text" placeholder="Nickname">
+        <button class="bg-my-green w-fit px-3.5 py-1.5 rounded-md self-end">
+            <p>Update</p>
+        </button>
+    </form>
+    <form class="w-80 flex flex-col gap-3">
+        <p>Change Nickname</p>
+        <input type="text" placeholder="Old Password">
+        <input type="text" placeholder="New Password">
+        <input type="text" placeholder="Confirm Password">
+        <button class="bg-my-green w-fit px-3.5 py-1.5 rounded-md self-end">
+            <p>Update</p>
+        </button>
+    </form>
+</div>
+{% endmacro %}
+
+{% macro assignments() %}
+<div class="w-full">
+    <ul class="flex flex-col gap-3">
+        <li>{{assignment_item('For Loop Basic', true)}}</li>
+        <li>{{assignment_item('Functions Intermediate I', false)}}</li>
+        <li>{{assignment_item('BankAccount', false)}}</li>
+        <li>{{assignment_item('Users with Bank Accounts', false)}}</li>
+        <li>{{assignment_item('Users with Bank Accounts', false)}}</li>
+        <li>{{assignment_item('Users with Bank Accounts', false)}}</li>
+        <li>{{assignment_item('Users with Bank Accounts', false)}}</li>
+        <li>{{assignment_item('Users with Bank Accounts', false)}}</li>
+        <li>{{assignment_item('Users with Bank Accounts', false)}}</li>
+        <li>{{assignment_item('Users with Bank Accounts', false)}}</li>
+        <li>{{assignment_item('Users with Bank Accounts', false)}}</li>
+        <li>{{assignment_item('Users with Bank Accounts', false)}}</li>
+    </ul>
+</div>
+{% endmacro %}
