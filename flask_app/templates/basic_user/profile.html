@@ -18,7 +18,7 @@
         </div>
         <div class="w-full flex flex-col items-center justify-center p-6 border border-black rounded-b-md">
             {% if subpage == 'user' %}
-                {{ profile.user() }}
+                {{ profile.user_page(user) }}
             {% else %}
                 {{ profile.assignments() }}
             {% endif %}

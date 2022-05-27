@@ -16,7 +16,7 @@
 </div>
 {% endmacro %}
 
-{% macro user() %}
+{% macro user_page(user) %}
 <div class="text-center mb-7">
     <h3>13,023</h3>
     <p>Participation Points</p>
@@ -24,10 +24,11 @@
 <div class="flex gap-8">
     <form class="w-80 flex flex-col gap-3">
         <p>Change Nickname</p>
-        <input type="text" placeholder="Nickname">
-        <button class="bg-my-green w-fit px-3.5 py-1.5 rounded-md self-end">
+        <input class="api-input" placeholder="Nickname" type="text" name="name" id="name" value="{{ user.name }}"
+        url="/api/user/{{user.id}}/update">
+        <!-- <button class="bg-my-green w-fit px-3.5 py-1.5 rounded-md self-end">
             <p>Update</p>
-        </button>
+        </button> -->
     </form>
     <form class="w-80 flex flex-col gap-3">
         <p>Change Nickname</p>
