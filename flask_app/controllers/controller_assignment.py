@@ -12,7 +12,12 @@ def assignment_new():
 @app.route('/assignment/create', methods=['POST'])          
 @login_required
 def assignment_create():
-    return redirect('/')
+    id = request.form['cohort_id']
+    if not model_assignment.Assignment.validate(request.form):
+        return redirect(f'/cohort/{id}/edit')
+
+    model_assignment.Assignment.create(**request.form)
+    return redirect(f'/cohort/{id}/edit')
 
 @app.route('/assignment/<int:id>')          
 @login_required
@@ -57,7 +62,8 @@ def api_assignment_update(id):
     }
     return jsonify(res)
 
-@app.route('/assignment/<int:id>/delete')          
+@app.route('/assignment/<int:id>/delete/<int:cohort_id>')          
 @login_required
-def assignment_delete(id):
-    return redirect('/')
+def assignment_delete(id, cohort_id):
+    model_assignment.Assignment.delete_one(id=id)
+    return redirect(f'/cohort/{cohort_id}/edit')

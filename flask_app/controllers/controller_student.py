@@ -2,7 +2,7 @@ from flask_app import app, bcrypt
 from flask_app.config.utils import login_required, login_admin_required
 from flask import render_template, redirect, session, request, jsonify
 
-from flask_app.models import model_student, model_user
+from flask_app.models import model_student, model_user, model_cohort, model_assignment, model_students_have_assignments
 
 # @app.route('/student/new')          
 # @login_required
@@ -13,6 +13,7 @@ from flask_app.models import model_student, model_user
 @app.route('/student/create', methods=['POST'])          
 @login_admin_required
 def student_create():
+    # cohort = model_cohort.Cohort.get_one(id = request.form['cohort_id'])
     cohort_id = request.form['cohort_id']
     if not model_student.Student.validate(request.form):
         return redirect(f'/cohort/{cohort_id}/edit')
@@ -30,7 +31,13 @@ def student_create():
         'nickname': request.form['name']
     }
 
-    model_student.Student.create(**data)
+    student_id = model_student.Student.create(**data)
+
+    # add 
+    assignments = model_assignment.Assignment.get_all({'cohort_id': cohort_id})
+    for assignment in assignments:
+        model_students_have_assignments.students_has_assignments.create(student_id=student_id,assignment_id=assignment.id)
+
     return redirect(f'/cohort/{cohort_id}/edit')
 
 @app.route('/student/bulk_add')
