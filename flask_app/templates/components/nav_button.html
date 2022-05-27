@@ -1,0 +1,8 @@
+{% macro button(title, link, icon) %}
+<a href="/{{ link }}" class="w-full h-full bg-red-300">
+    <div type="button" class="shadow-md bg-white px-2.5 py-4 rounded-lg w-full flex gap-2.5 items-center ">
+        <img class="w-6" src="{{ url_for('static', filename=icon ) }}" alt="{{title}}">
+        <p>{{ title }}</p>
+    </div>
+</a>
+{% endmacro %}

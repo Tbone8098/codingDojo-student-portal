@@ -98,3 +98,21 @@ def student_delete(id):
 def student_remove(id, cohort_id):
     model_student.Student.update_one(cohort_id=None, id=id)
     return redirect(f'/cohort/{cohort_id}/edit')
+
+
+@app.route('/profile')
+@app.route('/profile/<subpage>')
+@login_required
+def student_profile(subpage='user'):
+    context = {
+        'subpage': subpage
+    }
+    return render_template("basic_user/profile.html", **context)
+
+@app.route("/leaderboard")
+def leader_board():
+    return render_template("basic_user/leaderboard.html")
+
+@app.route("/calendar")
+def calendar():
+    return render_template("basic_user/calendar.html")

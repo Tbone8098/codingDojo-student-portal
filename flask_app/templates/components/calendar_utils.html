@@ -1,0 +1,22 @@
+{% macro day(date, title, eod, reading, index) %}
+    <div class="w-56 bg-white flex flex-col items-center">
+        <div class="bg-my-blue text-center w-full px-1 {{ 'rounded-tl-md' if index == 0 }} {{ 'rounded-tr-md' if index == 4 }}">
+            <p class="text-white">{{date}}</p>
+        </div>
+        <div class="h-36 flex items-center px-1">
+            <p>{{ title }}</p>
+        </div>
+        <div class="bg-my-blue/20 h-20 w-full px-1">
+            <div class="flex items-center h-9">
+                <p class="text-xs font-light w-12">EOD</p>
+                <p class="text-sm">{{eod}}</p>
+            </div>
+            <div class="flex items-center h-9">
+                <p class="text-xs font-light w-12">Reading</p>
+                <p class="text-sm">{{reading}}</p>
+            </div>
+
+
+        </div>
+    </div>
+{% endmacro %}

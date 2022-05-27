@@ -21,7 +21,6 @@ def user_show(id):
 @app.route('/settings/<subpage>')     
 @login_required 
 def user_edit(subpage='user'):
-    session['page'] = 'settings'
 
     context = {
         'user': model_user.User.get_one(id=session['uuid']),

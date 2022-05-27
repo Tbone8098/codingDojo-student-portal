@@ -1,0 +1,13 @@
+{% macro schedule_item( title, content, link) %}
+<div class="flex gap-4">
+    <p class="w-24 text-right">{{title}}</p>
+    <p>{{content}}</p>
+</div>
+{% endmacro %}
+
+{% macro staff_member( name, id) %}
+<div class="flex justify-between">
+    <p>{{name}}</p>
+    <p class="text-my-blue">Message</p>
+</div>
+{% endmacro %}

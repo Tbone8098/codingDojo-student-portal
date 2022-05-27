@@ -1,0 +1,19 @@
+{% import 'components/nav_button.html' as utils %}
+
+<div class="shadow-md shadow-black/25 w-60 py-4 px-5 h-full flex flex-col justify-between relative">
+
+    <ul class="flex flex-col gap-5 z-10 w-full">
+        <li>{{ utils.button('Profile', 'profile', 'img/svg/portal_guy.svg') }}</li>
+        <li>{{ utils.button('Dashboard', 'dashboard', 'img/svg/dashboard.svg') }}</li>
+        <li>{{ utils.button('Leaderboard', 'leaderboard', 'img/svg/leaderboard.svg') }}</li>
+    </ul>
+    <ul class="flex flex-col gap-5 z-10">
+        <li>
+            <a href="/logout">
+                <p class="text-center text-white">Log out</p>
+            </a>
+        </li>
+        <li>{{ utils.button('Settings', 'settings', 'img/svg/settings.svg') }}</li>
+    </ul>
+    <div class="absolute bg-my-blue h-1/4 w-full bottom-0 left-0 "></div>
+</div>

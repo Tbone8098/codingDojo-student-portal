@@ -1,0 +1,29 @@
+{% import 'components/header.html' as head %}
+{% import 'components/profile_utils.html' as profile %}
+
+
+{% extends 'base.html' %}
+
+{% block base_navbar %}
+{% include 'components/navbar.html' %}
+{% endblock base_navbar %}
+
+{% block base_content %}
+<div class="flex flex-col">
+    {{ head.header('Profile') }}
+    <div>
+        <div class="flex border border-black border-b-0 w-fit rounded-t-md">
+            {{ profile.tab('User', '/profile', subpage == 'user', true) }}
+            {{ profile.tab('Assignments', '/profile/assignments', subpage == 'assignments', false) }}
+        </div>
+        <div class="w-full flex flex-col items-center justify-center p-6 border border-black rounded-b-md">
+            {% if subpage == 'user' %}
+                {{ profile.user() }}
+            {% else %}
+                {{ profile.assignments() }}
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock base_content %}
