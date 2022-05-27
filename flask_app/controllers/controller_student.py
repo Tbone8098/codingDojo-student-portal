@@ -81,3 +81,7 @@ def student_profile(subpage='user'):
 @app.route("/leaderboard")
 def leader_board():
     return render_template("basic_user/leaderboard.html")
+
+@app.route("/calendar")
+def calendar():
+    return render_template("basic_user/calendar.html")

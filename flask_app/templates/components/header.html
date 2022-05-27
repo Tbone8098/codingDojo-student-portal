@@ -1,10 +1,10 @@
-{% macro header(title, button) %}
+{% macro header(title, button, link) %}
 <div class="flex justify-between mt-4 mb-5 w-full items-center">
     <h1>{{title}}</h1>
     {% if button %}
-    <button class="bg-my-green px-8 py-2 rounded-lg h-fit">
+    <a href="{{link}}" class="bg-my-green px-8 py-2 rounded-lg h-fit">
         <p>{{button}}</p>
-    </button>
+    </a>
     {% endif %}
 </div>
 {% endmacro %}

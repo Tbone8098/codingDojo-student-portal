@@ -1,0 +1,46 @@
+{% extends 'admin/base.html' %}
+
+{% block admin_header %}
+<h1 class="text-4xl">Cohort</h1>
+<a class="btn border-black border-2" href="/cohort/new">+ New Cohort</a>
+{% endblock admin_header %}
+
+
+{% block admin_content %}
+<table class="text-center">
+    <thead>
+        <tr>
+            <th>Current</th>
+            <th>Stack</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cohort in all_cohorts %}
+        <tr cohort_id="{{ cohort.id }}">
+            <td>
+                {% if cohort.is_current %}
+                <input type="checkbox" name="is_current" class="is_current" status="{{ cohort.is_current }}" checked> Yes
+                {% else %}
+                <input type="checkbox" name="is_current" class="is_current" status="{{ cohort.is_current }}"> No
+                {% endif %}
+            </td>
+            <td>{{ cohort.stack.name }}</td>
+            <td>{{ cohort.start_date }}</td>
+            <td>{{ cohort.end_date }}</td>
+            <td>
+                <a class="btn bg-my-blue" href="/cohort/{{ cohort.id }}/edit">Edit</a> |
+                <a class="btn bg-my-danger text-my-dark" href="/cohort/{{ cohort.id }}/delete">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock admin_content %}
+
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/cohort_all.js') }}"></script>
+{% endblock js %}

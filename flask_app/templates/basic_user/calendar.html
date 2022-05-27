@@ -1,0 +1,36 @@
+{% import 'components/header.html' as head %}
+{% import 'components/calendar_utils.html' as calendar %}
+
+{% extends 'base.html' %}
+
+{% block base_navbar %}
+{% include 'components/navbar.html' %}
+{% endblock base_navbar %}
+
+{% block base_content %}
+<div class="flex flex-col">
+    {{ head.header('May - Monthly Calendar') }}
+    <div class="flex flex-col gap-2">
+        <ul class="flex">
+            {% for i in range(5) %}
+                {{ calendar.day('Mon 5/9', 'Intro To Python', 'Functions Intermediate I', 'Python OOP: Methods', i) }}
+            {% endfor %}
+        </ul>
+        <ul class="flex">
+            {% for i in range(5) %}
+                {{ calendar.day('Mon 5/9', 'Intro To Python', 'Functions Intermediate I', 'Python OOP: Methods', i) }}
+            {% endfor %}
+        </ul>
+        <ul class="flex">
+            {% for i in range(5) %}
+                {{ calendar.day('Mon 5/9', 'Intro To Python', 'Functions Intermediate I', 'Python OOP: Methods', i) }}
+            {% endfor %}
+        </ul>
+        <ul class="flex">
+            {% for i in range(5) %}
+                {{ calendar.day('Mon 5/9', 'Intro To Python', 'Functions Intermediate I', 'Python OOP: Methods', i) }}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock base_content %}
