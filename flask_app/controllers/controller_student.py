@@ -1,3 +1,4 @@
+from cmath import log
 from flask_app import app, bcrypt
 from flask_app.config.utils import login_required, login_admin_required
 from flask import render_template, redirect, session, request, jsonify
@@ -111,7 +112,9 @@ def student_remove(id, cohort_id):
 @login_required
 def student_profile(subpage='user'):
     context = {
-        'subpage': subpage
+        'subpage': subpage,
+        'student': model_student.Student.get_one(user_id=session['uuid']),
+        'user': model_user.User.get_one(id=session['uuid']),
     }
     return render_template("basic_user/profile.html", **context)
 
