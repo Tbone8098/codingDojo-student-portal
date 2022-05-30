@@ -46,16 +46,22 @@
             <h2 class="mt-3 text-2xl">Assignments</h2>
             <form class="flex flex-col gap-3" action="/assignment/create" method="post">
                 <input type="hidden" name="cohort_id" id="cohort_id" value="{{ cohort.id }}">
-                <div>
-                    <label for="assignment_add">Add New Assignment</label>
-                    <input type="text" name="name" id="name">
+                <div class="flex flex-col gap-3">
+                    <!-- <label for="assignment_add">Add New Assignment</label> -->
+                    <input type="text" name="name" id="name" placeholder="Add New Assignment">
                     {% for message in get_flashed_messages(category_filter=["err_assignment_name"]) %}
                     <p class="alert bg-my-danger text-white">{{ message }}</p>
                     {% endfor %}
                 </div>
-                <div>
-                    <label for="assignment_add">Week</label>
-                    <input type="text" name="week" id="week">
+                <div class="flex flex-col gap-3">
+                    <!-- <label for="assignment_add">Week</label> -->
+                    <!-- <input type="text" name="week" id="week" placeholder="Week"> -->
+                    <select class="my-select" name="week" id="week">
+                        <option value="1">Week 1</option>
+                        <option value="2">Week 2</option>
+                        <option value="3">Week 3</option>
+                        <option value="4">Week 4</option>
+                    </select>
                     {% for message in get_flashed_messages(category_filter=["err_assignment_week"]) %}
                     <p class="alert bg-my-danger text-white">{{ message }}</p>
                     {% endfor %}
@@ -71,13 +77,13 @@
             </ul>
         </div>
     </div>
-    <div class="col-span-8 border-black border-2 rounded my-5 px-3">
+    <div class="col-span-8 border-black border-2 rounded my-5 px-3 h-full">
         <div>
             <div class="flex justify-between items-center py-3 my-5 border-b-2 border-black">
                 <h2 class="text-2xl">Students</h2>
                 {% include 'components/admin/student_create.html' %}
             </div>
-            <div>
+            <div class="overflow-y-auto h-full">
                 {% if all_students %}
                 <table class="w-full text-center">
                     <thead>
@@ -94,7 +100,7 @@
                                 <a href="/student/{{student.id}}/{{cohort.id}}/remove">X</a>
                             </td>
                             <td>
-                                <p>{{ student.nickname }}</p>
+                                <p>{{ student.student.nickname }}</p>
                             </td>
                             <td class="flex gap-1 justify-center">
                                 <a class="btn bg-my-dark text-white" href="/student/{{student.id}}/edit">View

@@ -1,20 +1,15 @@
-from cmath import log
 from flask_app import app, bcrypt
 from flask_app.config.utils import login_required, login_admin_required
 from flask import render_template, redirect, session, request, jsonify
+import re
 
-from flask_app.models import model_student, model_user, model_cohort, model_assignment, model_students_have_assignments
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
-# @app.route('/student/new')          
-# @login_required
-# def student_new():
-#     context = {}
-#     return render_template('student_new.html', **context)
+from flask_app.models import model_student, model_user, model_assignment, model_students_have_assignments, model_cohort_has_students
 
 @app.route('/student/create', methods=['POST'])          
 @login_admin_required
 def student_create():
-    # cohort = model_cohort.Cohort.get_one(id = request.form['cohort_id'])
     cohort_id = request.form['cohort_id']
     if not model_student.Student.validate(request.form):
         return redirect(f'/cohort/{cohort_id}/edit')
@@ -28,22 +23,61 @@ def student_create():
 
     data = {
         'user_id': user_id,
-        'cohort_id': cohort_id,
         'nickname': request.form['name']
     }
 
     student_id = model_student.Student.create(**data)
 
+    records = model_cohort_has_students.CohortHasStudent.get_all(where=True, where_clause=('student_id', student_id))
+    if records:
+        for record in records:
+            model_cohort_has_students.CohortHasStudent.update_one(id = record.id, is_active=0)
+    model_cohort_has_students.CohortHasStudent.create(student_id=student_id, cohort_id=cohort_id, is_active=1)
+
     # add 
     assignments = model_assignment.Assignment.get_all({'cohort_id': cohort_id})
     for assignment in assignments:
-        model_students_have_assignments.students_has_assignments.create(student_id=student_id,assignment_id=assignment.id)
+        model_students_have_assignments.StudentsHasAssignments.create(student_id=student_id,assignment_id=assignment.id)
 
     return redirect(f'/cohort/{cohort_id}/edit')
 
-@app.route('/student/bulk_add')
-def bulk_add():
-    return render_template('admin/student_bulk.html')
+@app.route('/student/bulk_add/<int:cohort_id>')
+def bulk_add(cohort_id):
+    context = {
+        'cohort_id': cohort_id
+    }
+    return render_template('admin/student_bulk.html', **context)
+
+@app.route('/student/bulk_process', methods=['post'])
+def bulk_process():
+    print(request.form)
+    cohort_id = request.form['cohort_id']
+    
+    temp_list = []
+    temp = ''
+    for char in request.form['bulk']:
+        if char.isalpha() or char == '@' or char.isdigit() or char == '.':
+            temp += char
+        elif EMAIL_REGEX.match(temp):
+            email = temp
+            name = ' '.join(temp_list[0:])
+            potential_user = model_user.User.get_one(email=temp)
+            if potential_user:
+                print("user found")
+                # student = model_student.Student.get_one(user_id=potential_user.id)
+                # model_student.Student.update_one(id=student.id)
+            else:
+                user_id = model_user.User.create(email=email, name=name)
+                student_id = model_student.Student.create(user_id=user_id, nickname=name)
+                model_cohort_has_students.CohortHasStudent.create(student_id=student_id, cohort_id=cohort_id)
+            temp = ''
+            temp_list = []
+        else:
+            if temp != '':
+                temp_list.append(temp)
+                temp = ''
+
+    return redirect(f'/cohort/{cohort_id}/edit')
 
 @app.route('/student/<int:id>/login')          
 @login_admin_required

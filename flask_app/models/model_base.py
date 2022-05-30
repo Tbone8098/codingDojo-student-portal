@@ -38,8 +38,14 @@ class base_model:
 # R ************************************************
 
     @classmethod
-    def get_all(cls):
-        query = f'SELECT * FROM {cls.table}'
+    def get_all(cls, where=False, where_clause=()):
+        """
+        If specifing a where clause then the where_clause variable is a tuple which needs two inputs. First is the category in which it needs to compare and second is the value that it should match. ie: "where {where_clause[0]} = {where_clause[1]}"
+        """
+        if not where:
+            query = f'SELECT * FROM {cls.table}'
+        else:
+            query = f'SELECT * FROM {cls.table} WHERE {where_clause[0]} = {where_clause[1]}'
         results = connectToMySQL(DATABASE_SCHEMA).query_db(query)
         if results:
             all_table_name = []
@@ -71,20 +77,3 @@ class base_model:
         str = self.sanitize(**data, paired=True)
         query = f'DELETE FROM {self.table} WHERE id = {id}'
         return connectToMySQL(DATABASE_SCHEMA).query_db(query,data)
-
-# Validation ************************************************
-
-    # @staticmethod
-    # def validate(form_data:dict, validation_data:dict) -> bool:
-    #     """
-    #     form_data: is the request.form from the html page
-    #     validation_data: keys need to match the keys in the form_data dictionary. The values are 
-    #     """
-    #     is_valid = True
-
-    #     return  is_valid
-
-
-    # @staticmethod
-    # def validate_api():
-    #     pass

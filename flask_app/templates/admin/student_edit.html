@@ -15,18 +15,18 @@
     <div class="flex justify-between mx-8">
         <div class="flex flex-col gap-3">
             <div class="flex flex-col gap-3 text-center">
-                <label for="name">Name</label>
+                <label for="name"><p>Name</p></label>
                 <input class="api-input" type="text" name="name" id="name" value="{{ user.name }}"
                     url="/api/user/{{user.id}}/update">
             </div>
             <div class="flex flex-col gap-3 text-center">
-                <label for="email">Email</label>
+                <label for="email"><p>Email</p></label>
                 <input class="api-input" type="text" name="email" id="email" value="{{ user.email }}"
                     url="/api/user/{{user.id}}/update">
             </div>
         </div>
         <div class="flex flex-col gap-3 text-center">
-            <label for="nickname">Nickname</label>
+            <label for="nickname"><p>Nickname</p></label>
             <input class="api-input" type="text" name="nickname" id="nickname" value="{{ student.nickname }}"
                 url="/api/student/{{student.id}}/update">
         </div>
@@ -34,7 +34,7 @@
 </div>
 <div class="grid grid-cols-2 gap-3 mt-5">
     <div class="flex flex-col gap-3 text-center">
-        <label for="ap_status">AP Status</label>
+        <label for="ap_status"><p>AP Status</p></label>
         <select class="api-input my-select" name="exam_status" id="exam_status"
             url="/api/student/{{student.id}}/update">
             {% for item in student.ap_options %}
@@ -46,22 +46,28 @@
         </select>
     </div>
     <div class="flex flex-col gap-3 text-center">
-        <label for="ap_count">AP Count</label>
+        <label for="ap_count"><p>AP Count</p></label>
         <input class="api-input" type="text" name="ap_count" id="ap_count" value="{{ student.ap_count }}"
             url="/api/student/{{student.id}}/update">
     </div>
     <div class="flex flex-col gap-3 text-center">
-        <label for="sessions_missed">Sessions Missed</label>
+        <label for="sessions_missed"><p>Sessions Missed</p></label>
         <input class="api-input" type="text" name="sessions_missed" id="sessions_missed"
             value="{{ student.sessions_missed }}" url="/api/student/{{student.id}}/update">
     </div>
-    <div class="flex flex-col gap-3 text-center">
-        <label for="lpacp">LPACP</label>
-        <input class="api-input" type="text" name="lpacp" id="lpacp" value="{{ student.lpacp }}"
+    <div class="flex gap-3">
+        <div class="flex flex-col gap-3 text-center">
+            <label for="lpacp"><p>LPACP</p></label>
+            <input class="api-input" type="text" name="lpacp" id="lpacp" value="{{ student.lpacp }}"
             url="/api/student/{{student.id}}/update">
+        </div>
+        <div class="flex flex-col gap-3 text-center">
+            <p>Core Assignments Completed</p>
+            <p><strong>{{ student.core_count }}</strong> <a href="#">View</a></p>
+        </div>
     </div>
     <div class="flex flex-col gap-3 text-center">
-        <label for="exam_status">Exam Status</label>
+        <label for="exam_status"><p>Exam Status</p></label>
         <select class="api-input my-select" name="exam_status" id="exam_status"
             url="/api/student/{{student.id}}/update">
             {% for item in student.exam_options %}
@@ -84,7 +90,7 @@
 {% endif %}
 
 {% block js %}
-<script src="{{ url_for('static', filename='js/student_edit.js') }}"></script>r
+<script src="{{ url_for('static', filename='js/student_edit.js') }}"></script>
 {% endblock js %}
 
 
