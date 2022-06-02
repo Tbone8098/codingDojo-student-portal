@@ -1,3 +1,4 @@
+import json
 from flask_app import app, bcrypt
 from flask_app.config.utils import login_required, login_admin_required
 from flask import render_template, redirect, session, request, jsonify
@@ -63,9 +64,7 @@ def bulk_process():
             name = ' '.join(temp_list[0:])
             potential_user = model_user.User.get_one(email=temp)
             if potential_user:
-                print("user found")
-                # student = model_student.Student.get_one(user_id=potential_user.id)
-                # model_student.Student.update_one(id=student.id)
+                pass
             else:
                 user_id = model_user.User.create(email=email, name=name)
                 student_id = model_student.Student.create(user_id=user_id, nickname=name)
@@ -87,6 +86,13 @@ def student_login(id):
     session['uuid'] = student.user.id
     session['level'] = student.user.level
     return redirect('/')
+
+@app.route('/student/all')
+def all_students():
+    context = {
+        'all_students': model_student.Student.get_all_join_users()
+    }
+    return render_template('admin/student_all.html', **context)
 
 @app.route('/student/<int:id>/edit')          
 @login_admin_required
@@ -140,6 +146,17 @@ def student_remove(id, cohort_id):
     model_student.Student.update_one(cohort_id=None, id=id)
     return redirect(f'/cohort/{cohort_id}/edit')
 
+@app.route('/api/student/mass/delete', methods=['POST'])          
+@login_required
+def student_mass_delete():
+    print(request.form['list'])
+    list = json.loads(request.form['list'])
+    for item in list:
+        cohort = model_cohort_has_students.CohortHasStudent.get_one(student_id = item['student_id'])
+        model_cohort_has_students.CohortHasStudent.delete_one(id = cohort.id)
+        model_student.Student.delete_one(id=item['student_id'])
+        model_user.User.delete_one(id=item['user_id'])
+    return jsonify(msg='success')
 
 @app.route('/profile')
 @app.route('/profile/<subpage>')

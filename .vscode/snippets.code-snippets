@@ -115,4 +115,14 @@
 		],
 		"description": "flask modal table"
 	},
+	"action_route": {
+		"prefix": "my_flask_action_route",
+		"body": [
+		  "@app.route('/${1:table}/<iny:id>/${2:action}', methods=['POST'])          ",
+		  "@login_required",
+		  "def ${1:table}_${2:action}(id):",
+		  "    return redirect('${3:return route}')"
+		],
+		"description": "action_route"
+	  }
 }

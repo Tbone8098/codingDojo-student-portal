@@ -1,8 +1,8 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_app.models import model_base, model_user, model_students_have_assignments, model_assignment
+from flask_app.models import model_base, model_user, model_students_have_assignments
 from flask_app import DATABASE_SCHEMA
-import re
+
 
 class Student(model_base.base_model):
     table = 'Students'
@@ -43,14 +43,33 @@ class Student(model_base.base_model):
                 count += 1
         return count
 
+    # @classmethod
+    # def get_all(cls, **data) -> list:
+    #     query = "SELECT * FROM students WHERE cohort_id = %(cohort_id)s"
+    #     results = connectToMySQL(DATABASE_SCHEMA).query_db(query, data)
+    #     if results:
+    #         all_students = []
+    #         for dict in results:
+    #             all_students.append(cls(dict))
+    #         return all_students
+    #     return []
+
     @classmethod
-    def get_all(cls, **data) -> list:
-        query = "SELECT * FROM students WHERE cohort_id = %(cohort_id)s"
-        results = connectToMySQL(DATABASE_SCHEMA).query_db(query, data)
+    def get_all_join_users(cls):
+        query = "SELECT * FROM students JOIN users ON users.id = students.user_id;"
+        results = connectToMySQL(DATABASE_SCHEMA).query_db(query)
         if results:
             all_students = []
             for dict in results:
-                all_students.append(cls(dict))
+                student = cls(dict)
+                data = {
+                    **dict,
+                    'id': dict['users.id'],
+                    'created_at': dict['users.created_at'],
+                    'updated_at': dict['users.updated_at'],
+                }
+                student.user_info = model_user.User(data)
+                all_students.append(student)
             return all_students
         return []
 
