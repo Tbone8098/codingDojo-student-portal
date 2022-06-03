@@ -32,11 +32,17 @@ def bulk_add(cohort_id):
     temp_list = []
     temp = ''
     for char in request.form['bulk']:
-        if char.isalpha() or char.isdigit():
+        if char.isalpha() or char.isdigit() or char == "$":
             temp += char
         else:
             if temp != '':
-                temp_list.append(temp)
+                # end = ['Prac', 'Opt', 'Cor', 'Rev', 'Exam']
+                end = "$$"
+                if temp == end:
+                    model_assignment.Assignment.create(week=temp_list[0], day=temp_list[1], name=' '.join(temp_list[2:-1]), type=temp_list[-1], cohort_id=cohort_id)
+                    temp_list = []
+                else:
+                    temp_list.append(temp)
                 temp = ''
     print(temp_list)
     return redirect(f'/cohort/{cohort_id}/edit')
