@@ -1,0 +1,12 @@
+{% extends 'admin/base.html' %}
+
+{% block admin_header %}
+    <h1 class="text-4xl">Bulk Add Assignemnts</h1>
+{% endblock admin_header %}
+
+{% block admin_content %}
+    <form class="flex flex-col w-full gap-3" action="/assignment/bulk/{{cohort_id}}/process" method="post">
+        <textarea class="border-black border-2 rounded-lg w-full h-96" name="bulk" id="bulk" placeholder="Add Assignments Here"></textarea>
+        <button class="btn bg-my-green">Add Assignments</button>
+    </form>
+{% endblock admin_content %}

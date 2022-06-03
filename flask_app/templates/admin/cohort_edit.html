@@ -43,19 +43,19 @@
             <button class="btn bg-my-green">Update Cohort</button>
         </form>
         <div>
-            <h2 class="mt-3 text-2xl">Assignments</h2>
+            <div class="flex gap-3 justify-between items-center mt-3">
+                <h2 class="text-2xl">Assignments</h2>
+                <a class="text-blue-500" href="/assignment/bulk/{{ cohort.id }}">Bulk Add</a>
+            </div>
             <form class="flex flex-col gap-3" action="/assignment/create" method="post">
                 <input type="hidden" name="cohort_id" id="cohort_id" value="{{ cohort.id }}">
                 <div class="flex flex-col gap-3">
-                    <!-- <label for="assignment_add">Add New Assignment</label> -->
                     <input type="text" name="name" id="name" placeholder="Add New Assignment">
                     {% for message in get_flashed_messages(category_filter=["err_assignment_name"]) %}
                     <p class="alert bg-my-danger text-white">{{ message }}</p>
                     {% endfor %}
                 </div>
                 <div class="flex flex-col gap-3">
-                    <!-- <label for="assignment_add">Week</label> -->
-                    <!-- <input type="text" name="week" id="week" placeholder="Week"> -->
                     <select class="my-select" name="week" id="week">
                         <option value="1">Week 1</option>
                         <option value="2">Week 2</option>
@@ -65,6 +65,22 @@
                     {% for message in get_flashed_messages(category_filter=["err_assignment_week"]) %}
                     <p class="alert bg-my-danger text-white">{{ message }}</p>
                     {% endfor %}
+                </div>
+                <div>
+                    <select class="my-select" name="day" id="day">
+                        <option value="Mon">Monday</option>
+                        <option value="Tue">Tuesday</option>
+                        <option value="Wed">Wednesday</option>
+                        <option value="Thu">Thursday</option>
+                        <option value="Fri">Friday</option>
+                    </select>
+                </div>
+                <div>
+                    <select class="my-select" name="type" id="type">
+                        <option value="Optional">Optional</option>
+                        <option value="Core">Core</option>
+                        <option value="Practice">Practice</option>
+                    </select>
                 </div>
                 <button class="btn bg-my-green">Add</button>
             </form>

@@ -67,14 +67,14 @@ def student_create():
     return redirect(f'/cohort/{cohort_id}/edit')
 
 @app.route('/student/bulk_add/<int:cohort_id>')
-def bulk_add(cohort_id):
+def student_bulk_add(cohort_id):
     context = {
         'cohort_id': cohort_id
     }
     return render_template('admin/student_bulk.html', **context)
 
 @app.route('/student/bulk_process', methods=['post'])
-def bulk_process():
+def student_bulk_process():
     print(request.form)
     cohort_id = request.form['cohort_id']
     
