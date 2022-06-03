@@ -1,5 +1,7 @@
 from functools import wraps
 from flask import request, redirect, session, flash
+import random
+import string
 
 def login_required(f):
     @wraps(f)
@@ -32,3 +34,9 @@ def history(data:dict):
         session['history']
     
     print(data)
+
+
+def generate_rndm():
+    digit_char = random.choices(string.ascii_uppercase, k=9) + random.choices(string.digits, k=2)
+    random.shuffle(digit_char)
+    return "CODINGDOJO" + ''.join(digit_char)

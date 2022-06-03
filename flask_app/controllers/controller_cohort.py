@@ -2,7 +2,7 @@ from flask_app import app
 from flask import render_template, redirect, session, request, flash, jsonify
 from flask_app.config.utils import check_logged_in_id,login_admin_required
 
-from flask_app.models import model_cohort, model_stack, model_student
+from flask_app.models import model_cohort, model_stack, model_cohort_has_students, model_assignment
 
 @app.route('/cohort/new')
 @login_admin_required           
@@ -67,7 +67,8 @@ def cohort_edit(id):
     context = {
         'cohort': model_cohort.Cohort.get_one(id=id),
         'all_stacks': model_stack.Stack.get_all(),
-        'all_students': model_student.Student.get_all(cohort_id=id)
+        'all_students': model_cohort_has_students.CohortHasStudent.get_all(where=True, where_clause=('cohort_id', id)),
+        'all_assignments': model_assignment.Assignment.get_all({'cohort_id':id})
     }
     return render_template('admin/cohort_edit.html', **context)
 
@@ -92,4 +93,4 @@ def cohort_delete(id):
         flash("You can't do that!" , 'err_notifications')
         return redirect('/cohorts')
     model_cohort.Cohort.delete_one(id=id)
-    return redirect('/cohorts')
+    return redirect('/cohort/all')

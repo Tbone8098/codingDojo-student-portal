@@ -1,0 +1,37 @@
+{% extends 'admin/base.html' %}
+
+{% block admin_content %}
+<div class="flex gap-3 justify-between mx-8">
+    <p>Group Actions</p>
+    <button class="btn bg-my-danger text-white mass_delete_btn disabled">Delete</button>
+</div>
+<div class="w-full">
+    <table class="text-center w-full">
+        <thead>
+            <tr>
+                <th>Select <button class="btn bg-my-accent text-white select_all_btn">All</button></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in all_students %}
+            <tr>
+                <td><input class="student_checkbox" type="checkbox" name="student" user_id="{{ student.user_info.id }}" student_id="{{ student.id }}"></td>
+                <td>{{ student.user_info.name }}</td>
+                <td>{{ student.user_info.email }}</td>
+                <td class="flex gap-3 justify-center">
+                    <a class="btn bg-my-blue text-white" href="/student/{{ student.id }}/edit">View Student</a>
+                    <a class="btn bg-my-danger text-white" href="/student/{{ student.id }}/edit">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock admin_content %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/student_all.js') }}"></script>
+{% endblock js %}

@@ -5,5 +5,9 @@
 {% endblock admin_header %}
 
 {% block admin_content %}
-    <h1>bulk add</h1>
+    <form class="flex flex-col w-full gap-3" action="/student/bulk_process" method="post">
+        <input type="hidden" name="cohort_id" id="cohort_id" value="{{cohort_id}}">
+        <textarea class="border-black border-2 rounded-lg w-full h-96" name="bulk" id="bulk" placeholder="Add students here"></textarea>
+        <button class="btn bg-my-green">Add Students</button>
+    </form>
 {% endblock admin_content %}

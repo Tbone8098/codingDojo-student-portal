@@ -62,13 +62,13 @@
 			"def ${1:table name}_update(id):",
 			"    return redirect('/')",
 			"",
-			"@app.route('/api/{1:table name}/<int:id>/update', methods=['POST'])          ",
+			"@app.route('/api/${1:table name}/<int:id>/update', methods=['POST'])          ",
 			"@login_required",
-			"def api_{1:table name}_update(id):",
+			"def api_${1:table name}_update(id):",
 			"    all_errors = {}",
 			"",
 			"    input_dict = {",
-			"        '${2:input_name}': model_{1:table name}.{3:table name (CAPS) }.validate_${2:input_name}_api, ",
+			"        '${2:input_name}': model_${1:table name}.${3:table name (CAPS) }.validate_${2:input_name}_api, ",
 			"        }",
 			"",
 			"    for item in input_dict:",
@@ -84,7 +84,7 @@
 			"            'errors': all_errors",
 			"        }",
 			"        return jsonify(res)",
-			"    model_{1:table name}.{3:table name (CAPS) }.update_one(**request.form, id=id)",
+			"    model_${1:table name}.${3:table name (CAPS) }.update_one(**request.form, id=id)",
 			"    res = {",
 			"        'status': 200",
 			"    }",
@@ -115,4 +115,14 @@
 		],
 		"description": "flask modal table"
 	},
+	"action_route": {
+		"prefix": "my_flask_action_route",
+		"body": [
+		  "@app.route('/${1:table}/<iny:id>/${2:action}', methods=['POST'])          ",
+		  "@login_required",
+		  "def ${1:table}_${2:action}(id):",
+		  "    return redirect('${3:return route}')"
+		],
+		"description": "action_route"
+	  }
 }
