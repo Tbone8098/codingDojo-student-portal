@@ -19,6 +19,28 @@ def assignment_create():
     model_assignment.Assignment.create(**request.form)
     return redirect(f'/cohort/{id}/edit')
 
+@app.route('/assignment/bulk/<int:cohort_id>')
+def assignment_bulk_add(cohort_id):
+    context = {
+        'cohort_id': cohort_id
+    }
+    return render_template('/admin/assignment_bulk.html', **context)
+
+@app.route('/assignment/bulk/<int:cohort_id>/process', methods=['POST'])
+def bulk_add(cohort_id):
+    print(request.form)
+    temp_list = []
+    temp = ''
+    for char in request.form['bulk']:
+        if char.isalpha() or char.isdigit():
+            temp += char
+        else:
+            if temp != '':
+                temp_list.append(temp)
+                temp = ''
+    print(temp_list)
+    return redirect(f'/cohort/{cohort_id}/edit')
+
 @app.route('/assignment/<int:id>')          
 @login_required
 def assignment_show(id):
