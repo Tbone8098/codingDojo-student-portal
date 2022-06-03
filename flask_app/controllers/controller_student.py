@@ -8,6 +8,12 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 from flask_app.models import model_student, model_user, model_assignment, model_students_have_assignments, model_cohort_has_students
 
+@app.route('/student/request_password/<int:user_id>')
+def request_password(user_id):
+    code = generate_rndm()
+    model_user.User.update_one(id = user_id, temp_code = code)
+    return redirect(f'/student/codingdojo/{code}')
+
 @app.route('/student/codingdojo/<code>')          
 def student_initLogin(code):
     user = model_user.User.get_one(temp_code=code)
