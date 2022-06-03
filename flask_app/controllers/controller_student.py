@@ -1,12 +1,30 @@
 import json
 from flask_app import app, bcrypt
-from flask_app.config.utils import login_required, login_admin_required
+from flask_app.config.utils import login_required, login_admin_required, generate_rndm
 from flask import render_template, redirect, session, request, jsonify
 import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 
 from flask_app.models import model_student, model_user, model_assignment, model_students_have_assignments, model_cohort_has_students
+
+@app.route('/student/codingdojo/<code>')          
+def student_initLogin(code):
+    user = model_user.User.get_one(temp_code=code)
+    if user:
+        context = {
+            'user': user
+        }
+        return render_template('basic_user/student_register.html', **context)
+    return redirect('/')
+
+@app.route('/student/<int:user_id>/reset_password', methods=['post'])
+def student_reset_password(user_id):
+    hash_pw = bcrypt.generate_password_hash(request.form['pw'])
+    model_user.User.update_one(id=user_id, pw=hash_pw, temp_code='')
+    session['uuid'] = user_id
+    session['level'] = 1
+    return redirect('/')
 
 @app.route('/student/create', methods=['POST'])          
 @login_admin_required
@@ -66,7 +84,8 @@ def bulk_process():
             if potential_user:
                 pass
             else:
-                user_id = model_user.User.create(email=email, name=name)
+                url = generate_rndm()
+                user_id = model_user.User.create(email=email, name=name, temp_code=url)
                 student_id = model_student.Student.create(user_id=user_id, nickname=name)
                 model_cohort_has_students.CohortHasStudent.create(student_id=student_id, cohort_id=cohort_id)
             temp = ''
